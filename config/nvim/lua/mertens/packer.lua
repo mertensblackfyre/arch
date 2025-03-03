@@ -17,7 +17,8 @@ return require('packer').startup(function(use)
 --use {'decaycs/decay.nvim', as = 'decay'}
 --use {'nyoom-engineering/oxocarbon.nvim'}
 use "tjdevries/colorbuddy.nvim"
-
+use 'andweeb/presence.nvim'
+--use 'IogaMaster/neocord'
 use {
     "windwp/nvim-autopairs",
     event = "InsertEnter",

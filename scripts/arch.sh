@@ -24,8 +24,9 @@ echo "Installing programming languages" | cowsay
 sudo pacman -S go gcc cmake make
 
 echo "Installing utils" | cowsay 
-sudo pacman -S ncdu nginx-mainline ufw openvpn btop fzf
-yay -S  wireguard-arch wireguard-tools
+sudo pacman -S ncdu nginx-mainline ufw openvpn btop fzf discord
+#yay -S  wireguard-arch wireguard-tools
+yay -Sy brave-bin
 
 sudo pacman -S ghostty
 sudo pacman -S waybar hyperland hyprpaper hyprshot
