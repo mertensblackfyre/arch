@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # Remove old configuration directories if they exist
-for dir in nvim alacritty waybar hypr; do
+for dir in nvim alacritty waybar hypr ghostty tofi; do
   if [ -d ~/Desktop/Projects/arch/config/$dir ]; then
     echo "Removing existing $dir config..."
     rm -rf ~/Desktop/Projects/arch/config/$dir
@@ -11,7 +11,7 @@ for dir in nvim alacritty waybar hypr; do
 done
 
 # Copy current configurations to the Desktop/arch/config directory
-for dir in nvim alacritty waybar hypr; do
+for dir in nvim alacritty waybar hypr ghostty tofi; do
   if [ -d ~/.config/$dir ]; then
     echo "Copying $dir config to Desktop/arch/config..."
     cp -r ~/.config/$dir ~/Desktop/Projects/arch/config/
