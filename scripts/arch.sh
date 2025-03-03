@@ -26,9 +26,9 @@ sudo pacman -S go gcc cmake make
 echo "Installing utils" | cowsay 
 sudo pacman -S ncdu nginx-mainline ufw openvpn btop fzf discord
 #yay -S  wireguard-arch wireguard-tools
-yay -Sy brave-bin
+yay -Sy brave-bin hyprshot tofi
 
 sudo pacman -S ghostty
-sudo pacman -S waybar hyperland hyprpaper hyprshot
+sudo pacman -S waybar hyprland hyprpaper hyprlock
 
 sudo systemctl enable --now ly
