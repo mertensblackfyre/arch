@@ -3,7 +3,7 @@ sudo pacman -Syu
 sudo pacman -S dosfstools mtools os-prober base-devel autoconf git
 sudo pacman -S wget pulseaudio unzip resolvconf pavucontrol
 sudo pacman -S nautilus gvfs gvfs-afc
-sudo pacman -S mtpfs libmtp gvfs-mtp
+sudo pacman -S mtpfs libmtp gvfs-mtp zathura-pdf-mupdf zathura
 
 echo "Installing Dev enviroment" | cowsay 
 sudo pacman -S tmux neovim fastfetch ly
@@ -26,7 +26,8 @@ sudo pacman -S go gcc cmake make
 echo "Installing utils" | cowsay 
 sudo pacman -S ncdu nginx-mainline ufw openvpn btop fzf discord
 #yay -S  wireguard-arch wireguard-tools
-yay -Sy brave-bin hyprshot tofi
+yay -Sy hyprshot tofi
+yay -S librewolf-bin
 
 sudo pacman -S ghostty
 sudo pacman -S waybar hyprland hyprpaper hyprlock

@@ -2,7 +2,7 @@
 
 # Remove old configuration directories if they exist
 for dir in nvim alacritty waybar hypr ghostty tofi; do
-  if [ -d ~/Desktop/Projects/arch/config/$dir ]; then
+  if [ -d ~/Desktop/arch/config/$dir ]; then
     echo "Removing existing $dir config..."
     rm -rf ~/Desktop/Projects/arch/config/$dir
   else
@@ -14,11 +14,18 @@ done
 for dir in nvim alacritty waybar hypr ghostty tofi; do
   if [ -d ~/.config/$dir ]; then
     echo "Copying $dir config to Desktop/arch/config..."
-    cp -r ~/.config/$dir ~/Desktop/Projects/arch/config/
+    cp -r ~/.config/$dir ~/Desktop/arch/config/
   else
     echo "$dir config does not exist in ~/.config/"
   fi
 done
+
+
+rm -rf ~/Desktop/arch/wallpapers
+cp -r ~/Pictures/assets ~/Desktop/arch/
+
+
+
 
 echo "Configuration sync complete."
 

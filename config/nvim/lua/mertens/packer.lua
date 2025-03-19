@@ -18,7 +18,6 @@ return require('packer').startup(function(use)
 --use {'nyoom-engineering/oxocarbon.nvim'}
 use "tjdevries/colorbuddy.nvim"
 use 'andweeb/presence.nvim'
---use 'IogaMaster/neocord'
 use {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
@@ -27,6 +26,7 @@ use {
     end
 }
 
+use "lukas-reineke/indent-blankline.nvim"
 use 'nvim-tree/nvim-web-devicons'
   use {
     'christoomey/vim-tmux-navigator',
