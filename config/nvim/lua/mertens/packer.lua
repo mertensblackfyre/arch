@@ -14,9 +14,10 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
 -- Themses
+use { 'dasupradyumna/midnight.nvim' }
 --use {'decaycs/decay.nvim', as = 'decay'}
 --use {'nyoom-engineering/oxocarbon.nvim'}
-use "tjdevries/colorbuddy.nvim"
+--use "tjdevries/colorbuddy.nvim"
 use 'andweeb/presence.nvim'
 use {
     "windwp/nvim-autopairs",

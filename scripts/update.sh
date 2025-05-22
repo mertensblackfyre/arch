@@ -21,11 +21,5 @@ for dir in nvim alacritty waybar hypr ghostty tofi; do
 done
 
 
-rm -rf ~/Desktop/arch/wallpapers
-cp -r ~/Pictures/assets ~/Desktop/arch/
-
-
-
-
 echo "Configuration sync complete."
 

@@ -1,31 +1,72 @@
+-- Lua
+vim.cmd.colorscheme 'midnight'
+--[[
+local decay = require("decay")
+
+local opt = vim.opt
+local cmd = vim.cmd
+
+opt.background = "dark"
+
+decay.setup({
+  style = "default",
+
+  -- enables italics in code keywords & comments.
+  italics = {
+    code = true,
+    comments = true,
+  },
+
+  -- enables contrast when using nvim tree.
+  nvim_tree = {
+    contrast = true
+  },
+})
+vim.cmd.colorscheme "decayce"
+]]
+
+--[[
 require("colorbuddy").colorscheme('gruvbuddy')
-
-
 local colorbuddy = require('colorbuddy')
 local Color = colorbuddy.Color
 local Group = colorbuddy.Group
 local c = colorbuddy.colors
 local g = colorbuddy.groups
+
 local s = colorbuddy.styles
 
-Color.new('red', '#cc6666')
-Color.new('superwhite', '#ffffff')
-Color.new('pink', '#fef601')
-Color.new('green', '#99cc99')
-Color.new('yellow', '#ffd60a')
-Color.new('blue', '#81a2be')
-Color.new('aqua', '#8ec07c')
-Color.new('cyan', '#8abeb7')
-Color.new('purple', '#c77dff')
-Color.new('violet', '#b294bb')
-Color.new('orange', '#de935f')
-Color.new('brown', '#a3685a')
+-- Base Colors
+Color.new('background', '#000000')     -- Dark navy background
+Color.new('foreground', '#a9b1d6')     -- Pale lavender text
+Color.new('cursor', '#c0caf5')         -- Bright lavender cursor
 
-Color.new('seagreen', '#698b69')
-Color.new('turquoise', '#698b69')
+-- Background Variants
+Color.new('contrast', '#16161e')       -- Darker background
+Color.new('lighter', '#24283b')        -- Lighter panel
+Color.new('cursorline', '#292e42')     -- Cursor line highlight
+Color.new('statusline_bg', '#1f2335')  -- Status line background
 
-local background_string = "#000000"
-Color.new("background", background_string)
-Color.new("gray0", background_string)
+-- Syntax Colors
+Color.new('red', '#f7768e')           -- Error/important
+Color.new('pink', '#ff75a0')          -- Special
+Color.new('orange', '#ff9e64')        -- Warning/numbers
+Color.new('yellow', '#e0af68')        -- Constants
+Color.new('green', '#9ece6a')         -- Strings
+Color.new('blue', '#7aa2f7')         -- Functions
+Color.new('teal', '#73daca')          -- Special
+Color.new('cyan', '#7dcfff')          -- Tags
+Color.new('purple', '#bb9af7')        -- Keywords
 
+-- UI Elements
+Color.new('comments', '#565f89')      -- Comments
+Color.new('black', '#000000')         -- Pure background
+Color.new('white', '#c0caf5')         -- Bright text
+Color.new('lavender', '#b4f9f8')      -- Special highlight
+Color.new('accent', '#7aa2f7')        -- Primary accent (blue)
 
+-- Additional Tokyo Night Colors
+Color.new('magenta', '#db4b4b')       -- Deprecated
+Color.new('violet', '#9d7cd8')       -- Special
+Color.new('dark_red', '#db4b4b')     -- Error
+
+]]
