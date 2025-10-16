@@ -21,13 +21,12 @@ sudo mv yay-git /opt
 cd
 
 echo "Installing programming languages" | cowsay 
-sudo pacman -S go gcc cmake make
+sudo pacman -S go gcc cmake make pyright gopls
 
 echo "Installing utils" | cowsay 
 sudo pacman -S ncdu nginx-mainline ufw openvpn btop fzf discord
-#yay -S  wireguard-arch wireguard-tools
+yay -S  wireguard-arch wireguard-tools
 yay -Sy hyprshot tofi
-yay -S librewolf-bin
 
 sudo pacman -S ghostty
 sudo pacman -S waybar hyprland hyprpaper hyprlock

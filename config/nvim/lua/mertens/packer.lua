@@ -14,7 +14,9 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
 -- Themses
-use { 'dasupradyumna/midnight.nvim' }
+
+use {'Sly-Harvey/radium.nvim'}
+--use { 'dasupradyumna/midnight.nvim' }
 --use {'decaycs/decay.nvim', as = 'decay'}
 --use {'nyoom-engineering/oxocarbon.nvim'}
 --use "tjdevries/colorbuddy.nvim"

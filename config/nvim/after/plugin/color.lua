@@ -1,5 +1,8 @@
 -- Lua
-vim.cmd.colorscheme 'midnight'
+--vim.cmd.colorscheme 'midnight'
+-- Lua
+
+vim.cmd('colorscheme radium')
 --[[
 local decay = require("decay")
 
