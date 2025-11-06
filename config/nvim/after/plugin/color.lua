@@ -2,8 +2,7 @@
 --vim.cmd.colorscheme 'midnight'
 -- Lua
 
-vim.cmd('colorscheme radium')
---[[
+--vim.cmd('colorscheme radium')
 local decay = require("decay")
 
 local opt = vim.opt
@@ -26,7 +25,6 @@ decay.setup({
   },
 })
 vim.cmd.colorscheme "decayce"
-]]
 
 --[[
 require("colorbuddy").colorscheme('gruvbuddy')
@@ -71,5 +69,4 @@ Color.new('accent', '#7aa2f7')        -- Primary accent (blue)
 Color.new('magenta', '#db4b4b')       -- Deprecated
 Color.new('violet', '#9d7cd8')       -- Special
 Color.new('dark_red', '#db4b4b')     -- Error
-
 ]]

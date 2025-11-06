@@ -15,9 +15,8 @@ return require('packer').startup(function(use)
 
 -- Themses
 
-use {'Sly-Harvey/radium.nvim'}
 --use { 'dasupradyumna/midnight.nvim' }
---use {'decaycs/decay.nvim', as = 'decay'}
+use {'decaycs/decay.nvim', as = 'decay'}
 --use {'nyoom-engineering/oxocarbon.nvim'}
 --use "tjdevries/colorbuddy.nvim"
 use 'andweeb/presence.nvim'
@@ -54,8 +53,6 @@ use 'nvim-tree/nvim-web-devicons'
       end
   })
 
-    
-
   use("nvim-treesitter/nvim-treesitter", {run = ":TSUpdate"})
   use("nvim-treesitter/playground")
   use("theprimeagen/harpoon")
@@ -64,7 +61,6 @@ use 'nvim-tree/nvim-web-devicons'
   use("tpope/vim-fugitive")
   use("nvim-treesitter/nvim-treesitter-context")
 
- use('ThePrimeagen/vim-be-good') 
  use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v1.x',
@@ -78,7 +74,6 @@ use 'nvim-tree/nvim-web-devicons'
 		  {'hrsh7th/nvim-cmp'},
 		  {'hrsh7th/cmp-buffer'},
 		  {'hrsh7th/cmp-path'},
-		  {'saadparwaiz1/cmp_luasnip'},
 		  {'hrsh7th/cmp-nvim-lsp'},
 		  {'hrsh7th/cmp-nvim-lua'},
 

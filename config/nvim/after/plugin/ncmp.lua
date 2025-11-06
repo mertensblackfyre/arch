@@ -1,22 +1,21 @@
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
+local cmp = require'cmp'
+local luasnip = require'luasnip'
 
-luasnip.config.setup {}
+-- Load friendly-snippets
+require("luasnip.loaders.from_vscode").lazy_load()
 
-cmp.setup {
+cmp.setup({
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
   },
-  mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
+  mapping = {
+    ['<Up>'] = cmp.mapping.select_prev_item(),   -- Up arrow
+    ['<Down>'] = cmp.mapping.select_next_item(), -- Down arrow
+    ['<Left>'] = cmp.mapping.scroll_docs(-1),    -- Optional: scroll docs left
+    ['<Right>'] = cmp.mapping.scroll_docs(1),    -- Optional: scroll docs right
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -25,7 +24,7 @@ cmp.setup {
       else
         fallback()
       end
-    end, { 'i', 's' }),
+    end, { "i", "s" }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -34,11 +33,14 @@ cmp.setup {
       else
         fallback()
       end
-    end, { 'i', 's' }),
+    end, { "i", "s" }),
   },
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'path' },
+    { name = 'nvim_lua' },
     { name = 'luasnip' },
-  },
-}
+  }
+})
 
