@@ -1,8 +1,16 @@
--- Lua
---vim.cmd.colorscheme 'midnight'
--- Lua
+require('nightfox').setup({
+    options = {
+        compile_path = vim.fn.stdpath("cache") .. "/nightfox",
+        compile_file_suffix = "_compiled", -- Compiled file suffix
+        transparent = true,                -- Disable setting background
+        terminal_colors = true,            -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
+        dim_inactive = false,              -- Non focused panes set to alternative background
+    },
+})
 
---vim.cmd('colorscheme radium')
+vim.cmd("colorscheme carbonfox")
+
+--[[
 local decay = require("decay")
 
 local opt = vim.opt
@@ -13,19 +21,16 @@ opt.background = "dark"
 decay.setup({
   style = "default",
 
-  -- enables italics in code keywords & comments.
   italics = {
     code = true,
     comments = true,
   },
-
-  -- enables contrast when using nvim tree.
   nvim_tree = {
     contrast = true
   },
 })
 vim.cmd.colorscheme "decayce"
-
+]]
 --[[
 require("colorbuddy").colorscheme('gruvbuddy')
 local colorbuddy = require('colorbuddy')

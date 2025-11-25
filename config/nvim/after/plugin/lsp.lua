@@ -18,6 +18,15 @@ vim.lsp.config('clangd', {
     }
 })
 
+vim.lsp.config["cmake-language-server"] = {
+    name = "cmake-language-server",
+    cmd = { "cmake-language-server" },
+    filetypes = { "cmake" },
+    root_markers = { "CMakeLists.txt" },
+    single_file_support = true,
+}
+
+
 vim.diagnostic.config({
   virtual_text = {
     prefix = "●",  -- symbol before text
@@ -38,3 +47,4 @@ vim.lsp.enable('pyright')
 vim.lsp.enable('gopls')
 vim.lsp.enable('clangd')
 vim.lsp.enable('luals')
+vim.lsp.enable('cmake-language-server')
