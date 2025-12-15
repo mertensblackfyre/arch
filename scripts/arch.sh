@@ -27,6 +27,7 @@ echo "Installing utils" | cowsay
 sudo pacman -S ncdu nginx-mainline ufw openvpn btop fzf discord
 yay -S  wireguard-arch wireguard-tools
 yay -Sy hyprshot tofi
+sudo pacman -S flatpak
 
 sudo pacman -S ghostty
 sudo pacman -S waybar hyprland hyprpaper hyprlock

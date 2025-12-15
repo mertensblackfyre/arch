@@ -14,9 +14,9 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- Themses
-    use { "vague2k/vague.nvim" }
+    -- use { "vague2k/vague.nvim" }
     use { "EdenEast/nightfox.nvim" }
-    use { 'decaycs/decay.nvim', as = 'decay' }
+    --use { 'decaycs/decay.nvim', as = 'decay' }
     --use "tjdevries/colorbuddy.nvim"
 
 
