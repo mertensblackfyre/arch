@@ -3,15 +3,19 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
+import "../themes/"
+
 PanelWindow {
     id: root
     anchors.top: true
     anchors.left: true
     anchors.bottom: true
     implicitWidth: 35
-    color: "#000000"
+
+    color: ThemeManager.primary
 
     Item {
+
         anchors.fill: parent
         WorkSpaces {
             id: workspaces
@@ -25,7 +29,7 @@ PanelWindow {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.margins: 12
             BatteryIndicator {
-                parent_window:root
+                parent_window: root
             }
 
             Time {}

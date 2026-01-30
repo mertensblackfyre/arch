@@ -1,6 +1,7 @@
 // WorkSpaces.qml
 import Quickshell.Hyprland
 import QtQuick
+import "../themes"
 
 Column {
     id: root
@@ -16,7 +17,7 @@ Column {
                 return kanji[num - 1] || num.toString();
             }
             text: toJapanese(ws.id)
-            color: isActive ? "#ccc9dc" : "#1b2a41"
+            color: isActive ? ThemeManager.secondary : ThemeManager.tertiary
             font {
                 pixelSize: 15
                 bold: true

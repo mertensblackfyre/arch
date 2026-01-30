@@ -13,6 +13,9 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
+
+
+    use { "scottmckendry/cyberdream.nvim" }
     -- Themses
     -- use { "vague2k/vague.nvim" }
     use { "EdenEast/nightfox.nvim" }

@@ -1,3 +1,13 @@
+require("cyberdream").setup({
+	colors = {
+		bg = "#000000",
+        --orange = "#808080",
+		--magenta = "#ffa500",
+	},
+})
+vim.cmd([[ colorscheme cyberdream ]])
+
+--[[
 require('nightfox').setup({
     options = {
         compile_path = vim.fn.stdpath("cache") .. "/nightfox",
@@ -9,6 +19,7 @@ require('nightfox').setup({
 })
 
 vim.cmd("colorscheme carbonfox")
+]]
 
 --[[
 local decay = require("decay")
