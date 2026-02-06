@@ -1,10 +1,13 @@
 // Time.qml
 import QtQuick
-import "../components/"
+import QtQuick.Layouts
+import "../themes"
 
-Column {
+ColumnLayout {
     id: clock
-    spacing: 0
+    spacing: 1
+    Layout.fillWidth: true
+    Layout.alignment: Qt.AlignHCenter
 
     function updateTime() {
         const now = new Date();
@@ -37,34 +40,30 @@ Column {
     Text {
         id: hour
         font.bold: true
-        color: "white"
-        font.pixelSize: 16
+        color: ThemeManager.palette.m3tertiary
+        font.pixelSize: 15
         horizontalAlignment: Text.AlignHCenter
     }
 
     Text {
         id: minute
-
         font.bold: true
-        color: "white"
-        font.pixelSize: 16
+        color: "#ffffff"
+        font.pixelSize: 15
         horizontalAlignment: Text.AlignHCenter
     }
 
     Text {
-        id: second
-        color: "#aaaaaa"
+        color: "#ffffff"
         font.bold: true
-        font.pixelSize: 14
+        font.pixelSize: 13
         horizontalAlignment: Text.AlignHCenter
     }
 
     Text {
-        id: ampm
-        color: "#777777"
+        color: "#ffffff"
         font.bold: true
-        font.pixelSize: 12
+        font.pixelSize: 11
         horizontalAlignment: Text.AlignHCenter
     }
-
 }

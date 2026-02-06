@@ -6,8 +6,8 @@ import "../components/"
 
 Item {
     id: battery_item
-    implicitWidth: 20
-    implicitHeight: 20
+    implicitWidth: 24
+    implicitHeight: 24
 
     property var parent_window
 
@@ -17,6 +17,7 @@ Item {
         fillMode: Image.PreserveAspectFit
         width: 24
         height: 24
+        anchors.centerIn: parent
     }
 
     MouseArea {
@@ -32,7 +33,6 @@ Item {
         expandDirection: Edges.Right
 
         isHovered: mouseArea.containsMouse
-        backgroundColor: "#111111"
         backgroundRadius: 10
 
         Text {

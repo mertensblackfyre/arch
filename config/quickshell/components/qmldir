@@ -1,0 +1,6 @@
+module components
+Pill 1.0 Pill.qml
+ Animation 1.0 Animation.qml
+CAnimation 1.0 ColorAnimation.qml
+PillContainer 1.0 PillContainer.qml
+MiniWindow 1.0 MiniWindow.qml

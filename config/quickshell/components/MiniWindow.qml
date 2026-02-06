@@ -1,5 +1,6 @@
 import Quickshell
 import QtQuick
+import "../themes"
 
 PopupWindow {
     id: tooltipPopup
@@ -13,7 +14,7 @@ PopupWindow {
     // Optional properties
     property int showDelay: 800
     property int hideDelay: 200
-    property color backgroundColor // add default color from theme
+    property color backgroundColor:ThemeManager.primary // add default color from theme
     property real backgroundRadius // add default rounding from theme
     property bool blockShow: false // NEW: override showing (ex. when a menu is open)
 
@@ -63,7 +64,6 @@ PopupWindow {
             }
         }
 
-        // Content container - this is where parent components inject their content
         Item {
             id: contentContainer
             anchors.centerIn: parent

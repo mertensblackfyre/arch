@@ -5,8 +5,7 @@ import "../themes"
 
 Column {
     id: root
-    anchors.margins: 12
-    spacing: 6
+    spacing: 5
     Repeater {
         model: Hyprland.workspaces.values
         Text {
@@ -17,7 +16,7 @@ Column {
                 return kanji[num - 1] || num.toString();
             }
             text: toJapanese(ws.id)
-            color: isActive ? ThemeManager.secondary : ThemeManager.tertiary
+            color: isActive ? ThemeManager.palette.m3primary : ThemeManager.palette.m3inversePrimary
             font {
                 pixelSize: 15
                 bold: true
