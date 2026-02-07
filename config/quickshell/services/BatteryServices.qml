@@ -24,7 +24,7 @@ QtObject {
 
     function icons() {
         var whole = percentage * 100;
-        var icon = "../assets/icons/fluent/";
+        var icon = "../../assets/icons/fluent/";
 
         if (whole == 100) {
             icon += "battery-full.svg";

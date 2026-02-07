@@ -200,7 +200,7 @@ Singleton {
         readonly property color m3secondaryContainer: themeManager.layer(themeManager.rawData.m3secondaryContainer)
         readonly property color m3onSecondaryContainer: themeManager.layer(themeManager.rawData.m3onSecondaryContainer)
 
-        readonly property color m3tertiary: themeManager.layer(themeManager.rawData.m3tertiary,2)
+        readonly property color m3tertiary: themeManager.layer(themeManager.rawData.m3tertiary)
         readonly property color m3onTertiary: themeManager.layer(themeManager.rawData.m3onTertiary)
         readonly property color m3tertiaryContainer: themeManager.layer(themeManager.rawData.m3tertiaryContainer)
         readonly property color m3onTertiaryContainer: themeManager.layer(themeManager.rawData.m3onTertiaryContainer)

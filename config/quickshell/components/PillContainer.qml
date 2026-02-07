@@ -1,9 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import "../components"
-import "../configs/" as Config
-
-import "../themes/" 
+import "../themes"
+import "../configs" as Config
 
 Rectangle {
     id: root
@@ -19,14 +18,14 @@ Rectangle {
     color: ThemeManager.layer(ThemeManager.palette.m3surfaceContainer, 2)
 
     Behavior on color {
-        CAnimation {}
+        ColorAnim {}
     }
 
     ColumnLayout {
         id: contentColumn
         anchors.top: root.alignTop ? parent.top : undefined
         anchors.verticalCenter: root.alignTop ? undefined : parent.verticalCenter
-        anchors.margins: Config.Appearance.padding.large
+        anchors.margins: Appearance.padding.large
 
         anchors.horizontalCenter: root.alignTop ? undefined : parent.horizontalCenter
         spacing: root.contentSpacing

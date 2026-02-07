@@ -1,2 +1,4 @@
+module services
 singleton Services 1.0 BatteryServices.qml
-
+singleton TimeService 1.0 TimeService.qml
+singleton HyprlandService 1.0 HyprlandService.qml

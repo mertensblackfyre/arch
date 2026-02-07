@@ -5,6 +5,7 @@ JsonObject {
     property Rounding rounding: Rounding {}
     property Spacing spacing: Spacing {}
     property Padding padding: Padding {}
+    property FontStuff font: FontStuff {}
     property Anim anim: Anim {}
     property Transparency transparency: Transparency {}
 
@@ -42,6 +43,10 @@ JsonObject {
         property int larger: 15 * scale
         property int large: 18 * scale
         property int extraLarge: 28 * scale
+    }
+
+    component FontStuff: JsonObject {
+        property FontSize size: FontSize {}
     }
 
     component AnimCurves: JsonObject {
