@@ -1,28 +1,59 @@
-// ActiveWindow.qml
+pragma ComponentBehavior: Bound
 
-import Quickshell.Hyprland
 import QtQuick
 
 import "../../components"
 import "../../themes"
 import "../../configs"
 import "../../services"
+import "../../utils"
 
 Item {
     id: root
-    implicitWidth: parent.width
-    implicitHeight: 120
 
     property color colour: ThemeManager.palette.m3primary
+    property Title current: text1
+    required property var bar
 
-    property string appClass: "DESKTOP"
+    readonly property int maxHeight: {
+        const otherModules = bar.children.filter(c => c.id && c.item !== this && c.id !== "spacer");
+        const otherHeight = otherModules.reduce((acc, curr) => acc + (curr.item.nonAnimHeight ?? curr.height), 0);
+        // Length - 2 cause repeater counts as a child
+        return bar.height - otherHeight - bar.spacing * (bar.children.length - 1) - bar.vPadding * 2;
+    }
+
+    clip: true
+    implicitWidth: Math.max(icon.implicitWidth, current.implicitHeight)
+    implicitHeight: icon.implicitHeight + current.implicitWidth + current.anchors.topMargin
 
     MaterialIcon {
         id: icon
         anchors.horizontalCenter: parent.horizontalCenter
         animate: true
-        // text: Icon.getAppCategoryIcon(Hyprland.activeToplevel?.lastIpcObject.class, "desktop_windows")
+        text: Icons.getAppCategoryIcon(HyprlandService.activeToplevel?.lastIpcObject.class, "desktop_windows")
         color: root.colour
+    }
+
+    Title {
+        id: text1
+    }
+    Title {
+        id: text2
+    }
+    TextMetrics {
+        id: metrics
+        text: HyprlandService.activeToplevel?.title ?? qsTr("Desktop")
+        font.pointSize: Appearance.font.size.smaller
+        font.family: Appearance.font.family.mono
+        elide: Qt.ElideRight
+        elideWidth: root.maxHeight - icon.height
+
+        onTextChanged: {
+            const next = root.current === text1 ? text2 : text1;
+            next.text = elidedText;
+            root.current = next;
+        }
+        onElideWidthChanged: root.current.text = elidedText
     }
 
     Behavior on implicitHeight {
@@ -31,25 +62,32 @@ Item {
             easing.bezierCurve: Appearance.anim.curves.expressiveDefaultSpatial
         }
     }
+    component Title: StyledText {
+        id: text
 
-    TextMetrics {
-        id: textMetrics
-        font.pixelSize: 14
+        anchors.horizontalCenter: icon.horizontalCenter
+        anchors.top: icon.bottom
+        anchors.topMargin: Appearance.spacing.small
+
+        font.pointSize: metrics.font.pointSize
+        font.family: metrics.font.family
+        color: root.colour
+        opacity: root.current === this ? 1 : 0
         font.bold: true
-        text: HyprlandService.getTruncatedTitle(25) ?? qsTr("Desktop")
-    }
 
-    StyledText {
-        anchors.centerIn: parent
+        transform: [
+            Translate {
+                x: -text.implicitWidth + text.implicitHeight
+            },
+            Rotation {
+                angle: 270
+                origin.x: text.implicitHeight / 2
+                origin.y: text.implicitHeight / 2
+            }
+        ]
 
-        text: HyprlandService.getTruncatedTitle(25) ?? qsTr("Desktop")
-        color: ThemeManager.palette.m3primary
-        font.pixelSize: 14
-        font.bold: true
-        rotation: 270
-        elide: Text.ElideRight
-        width: textMetrics.width + 10
-        height: textMetrics.height
+        width: implicitHeight
+        height: implicitWidth
 
         Behavior on opacity {
             Anim {}

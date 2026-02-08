@@ -12,22 +12,11 @@ Column {
     spacing: 1
     property color colour: ThemeManager.palette.m3primary
 
-    Loader {
-        anchors.horizontalCenter: parent.horizontalCenter
-        //   active: Config.bar.clock.showIcon
-        visible: active
-
-        // sourceComponent: MaterialIcon {
-        //   text: "calendar_month"
-        // color: root.colour
-        // }
-    }
-
     StyledText {
         id: text
         anchors.horizontalCenter: parent.horizontalCenter
         horizontalAlignment: StyledText.AlignHCenter
-        text: TimeService.format("hh\nmm\nA")
+        text: TimeService.format("hh\nmm")
         color: root.colour
         font.pointSize: Config.Appearance.font.size.smaller
         font.bold: true

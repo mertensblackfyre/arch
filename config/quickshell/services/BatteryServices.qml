@@ -24,19 +24,19 @@ QtObject {
 
     function icons() {
         var whole = percentage * 100;
-        var icon = "../../assets/icons/fluent/";
+        var icon
 
         if (whole == 100) {
-            icon += "battery-full.svg";
+            icon += "battery_android_full";
             return icon;
         }
 
         if (chargeState == 4) {
-            icon += "battery-pen.svg";
+            icon += "battery_android_pen";
             return icon;
         }
         if (isCharging) {
-            icon += "battery-charge.svg";
+            icon += "battery_android_bolt";
             return icon;
         }
         if (whole < 100 && whole >= 90) {

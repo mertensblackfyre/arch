@@ -25,7 +25,7 @@ Rectangle {
         id: contentColumn
         anchors.top: root.alignTop ? parent.top : undefined
         anchors.verticalCenter: root.alignTop ? undefined : parent.verticalCenter
-        anchors.margins: Appearance.padding.large
+        anchors.margins: Config.Appearance.padding.large
 
         anchors.horizontalCenter: root.alignTop ? undefined : parent.horizontalCenter
         spacing: root.contentSpacing

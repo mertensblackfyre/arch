@@ -17,8 +17,7 @@ Text {
     renderType: Text.NativeRendering
     textFormat: Text.PlainText
     color: ThemeManager.rawData.m3onSurface
-    //  font.family: Appearance.font.family.sans
-    // font.pointSize: Config.Appearance.font
+    font.family: Config.Appearance.font.family.sans
 
     Behavior on color {
         ColorAnim {}

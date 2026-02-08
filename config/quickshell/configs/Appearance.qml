@@ -35,6 +35,13 @@ JsonObject {
         property int large: 15 * scale
     }
 
+    component FontFamily: JsonObject {
+        property string sans: "SF Pro Display"
+        property string mono: "JetBrainsMono Nerd Font"
+        property string material: "Material Symbols Rounded"
+        property string clock: "Rubik"
+    }
+
     component FontSize: JsonObject {
         property real scale: 1
         property int small: 11 * scale
@@ -46,6 +53,7 @@ JsonObject {
     }
 
     component FontStuff: JsonObject {
+        property FontFamily family: FontFamily {}
         property FontSize size: FontSize {}
     }
 

@@ -6,7 +6,6 @@ import QtQuick.Layouts
 import "../../components"
 import "../../themes"
 
-
 PanelWindow {
     id: root
     anchors.top: true
@@ -28,7 +27,7 @@ PanelWindow {
         ColumnLayout {
             anchors.fill: parent
             spacing: 10
-            
+
             PillContainer {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 10
