@@ -14,6 +14,7 @@ Column {
 
     StyledText {
         id: text
+
         anchors.horizontalCenter: parent.horizontalCenter
         horizontalAlignment: StyledText.AlignHCenter
         text: TimeService.format("hh\nmm")

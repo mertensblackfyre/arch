@@ -24,15 +24,15 @@ QtObject {
 
     function icons() {
         var whole = percentage * 100;
-        var icon
+        var icon;
 
         if (whole == 100) {
-            icon += "battery_android_full";
+            icon = "battery_android_full";
             return icon;
         }
 
         if (chargeState == 4) {
-            icon += "battery_android_pen";
+            icon = "battery_android_pen";
             return icon;
         }
         if (isCharging) {
@@ -40,30 +40,30 @@ QtObject {
             return icon;
         }
         if (whole < 100 && whole >= 90) {
-            icon += "battery-6.svg";
+            icon = "battery_android_6";
         }
         if (whole < 90 && whole >= 70) {
-            icon += "battery-5.svg";
+            icon = "battery_android_5";
         }
 
         if (whole < 70 && whole >= 50) {
-            icon += "battery-4.svg";
+            icon = "battery_android_4";
         }
 
         if (whole < 50 && whole >= 30) {
-            icon += "battery-3.svg";
+            icon = "battery_android_3";
         }
 
         if (whole < 30 && whole >= 20) {
-            icon += "battery-2.svg";
+            icon = "battery_android_2";
         }
 
         if (whole < 20 && whole >= 10) {
-            icon += "battery-1.svg";
+            icon = "battery_android_1";
         }
 
         if (whole < 10) {
-            icon += "battery-warning.svg";
+            icon = "battery_android_alert";
         }
         return icon;
     }

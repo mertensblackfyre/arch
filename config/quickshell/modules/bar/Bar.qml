@@ -29,6 +29,7 @@ PanelWindow {
             spacing: 10
 
             PillContainer {
+                id: a
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 10
                 WorkSpaces {}
@@ -39,8 +40,11 @@ PanelWindow {
             }
 
             PillContainer {
+                id: b
                 Layout.alignment: Qt.AlignHCenter
-                ActiveWindow {}
+                ActiveWindow {
+                    bar: barBackground
+                }
             }
 
             Item {
@@ -48,6 +52,7 @@ PanelWindow {
             }
 
             PillContainer {
+                id: c
                 Layout.alignment: Qt.AlignHCenter
                 Layout.bottomMargin: 10
                 BatteryIndicator {

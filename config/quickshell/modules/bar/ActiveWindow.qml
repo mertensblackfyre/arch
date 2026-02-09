@@ -11,15 +11,25 @@ import "../../utils"
 Item {
     id: root
 
+    readonly property int vPadding: Appearance.padding.large
     property color colour: ThemeManager.palette.m3primary
     property Title current: text1
     required property var bar
 
     readonly property int maxHeight: {
-        const otherModules = bar.children.filter(c => c.id && c.item !== this && c.id !== "spacer");
-        const otherHeight = otherModules.reduce((acc, curr) => acc + (curr.item.nonAnimHeight ?? curr.height), 0);
-        // Length - 2 cause repeater counts as a child
-        return bar.height - otherHeight - bar.spacing * (bar.children.length - 1) - bar.vPadding * 2;
+        let used = 0;
+
+        for (let i = 0; i < bar.children.length; i++) {
+            const c = bar.children[i];
+            if (c === this)
+                continue;
+            if (c.Layout && c.Layout.fillHeight)
+                continue;
+
+            used += (c.nonAnimHeight ?? c.height);
+        }
+
+        return bar.height - used - 20 * (15 - 1) - vPadding * 2;
     }
 
     clip: true
@@ -46,7 +56,7 @@ Item {
         font.pointSize: Appearance.font.size.smaller
         font.family: Appearance.font.family.mono
         elide: Qt.ElideRight
-        elideWidth: root.maxHeight - icon.height
+        elideWidth: -root.maxHeight - icon.height
 
         onTextChanged: {
             const next = root.current === text1 ? text2 : text1;

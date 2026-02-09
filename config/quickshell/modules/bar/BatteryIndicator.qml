@@ -13,10 +13,12 @@ Item {
     property var parent_window
 
     MaterialIcon {
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        animate: true
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: -font.pointSize / 10
-
-        text: BatteryServices.icons()
+        text: Services.icons()
     }
 
     MouseArea {
