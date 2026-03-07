@@ -5,3 +5,5 @@ PillContainer 1.0 PillContainer.qml
 MiniWindow 1.0 MiniWindow.qml
 MaterialIcon 1.0 MaterialIcon.qml
 StyledText 1.0 StyledText.qml
+StyledRect 1.0 StyledRect.qml
+NetworkP 1.0 NetworkPop.qml

@@ -1,0 +1,66 @@
+import QtQuick 6.10
+import Quickshell
+
+PopupWindow {
+    id: popupWindow
+
+    property var targetWidget
+    required property rect position
+    required property int expandDirection
+    property bool shouldShow: false
+
+    signal requestClose
+
+    implicitHeight: 200
+    implicitWidth: 200
+    color: "red"
+    anchor {
+        item: targetWidget
+        rect: position
+        gravity: expandDirection
+    }
+
+    visible: shouldShow
+
+    QtObject {
+        id: cont
+        property bool mouseInside: false
+        property bool mouseHasEntered: false
+    }
+
+    // Reset when popup opens/closes
+    Connections {
+        target: popupWindow
+        function onShouldShowChanged() {
+            if (popupWindow.shouldShow) {
+                cont.mouseInside = false;
+                closeTimer.stop();
+            }
+        }
+    }
+
+    Timer {
+        id: closeTimer
+        interval: 400
+        repeat: false
+        onTriggered: {
+            if (!cont.mouseInside && cont.mouseHasEntered && popupWindow.shouldShow)
+                popupWindow.shouldShow = false;
+
+            console.log("From Network pop", popupWindow.shouldShow);
+        }
+    }
+
+    HoverHandler {
+        id: hoverHandler
+
+        onHoveredChanged: {
+            if (hovered) {
+                cont.mouseHasEntered = true;
+                closeTimer.stop();
+            } else if (cont.mouseHasEntered) {
+                closeTimer.restart();
+            }
+        }
+    }
+}

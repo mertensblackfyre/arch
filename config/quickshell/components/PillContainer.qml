@@ -8,7 +8,7 @@ Rectangle {
     id: root
 
     default property alias content: contentColumn.data
-    property real contentSpacing: Config.Appearance.spacing.larger
+    property real contentSpacing: Config.Appearance.spacing.small
     property bool alignTop: false
 
     implicitHeight: contentColumn.implicitHeight + Config.Appearance.padding.large * 2

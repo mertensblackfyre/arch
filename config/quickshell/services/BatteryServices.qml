@@ -36,7 +36,7 @@ QtObject {
             return icon;
         }
         if (isCharging) {
-            icon += "battery_android_bolt";
+            icon = "battery_android_bolt";
             return icon;
         }
         if (whole < 100 && whole >= 90) {

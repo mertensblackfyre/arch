@@ -19,7 +19,7 @@ PanelWindow {
     Rectangle {
         id: barBackground
         anchors.fill: parent
-        color: ThemeManager.palette.m3background
+        color: ThemeManager.rawData.m3background
 
         topRightRadius: 55
         bottomRightRadius: 55
@@ -55,6 +55,7 @@ PanelWindow {
                 id: c
                 Layout.alignment: Qt.AlignHCenter
                 Layout.bottomMargin: 10
+                Wifi {}
                 BatteryIndicator {
                     parent_window: root
                 }

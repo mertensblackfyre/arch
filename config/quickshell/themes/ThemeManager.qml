@@ -7,7 +7,7 @@ Singleton {
     id: themeManager
 
     property bool showPreview
-    property string wallpaperPath: "file:///home/mertens/Pictures/assets/wallpapers/raa.png"
+    property string wallpaperPath: "file:///home/mertens/Pictures/assets/wallpapers/cosmic.jpg"
 
     readonly property bool light: showPreview ? previewLight : currentLight
     property bool currentLight
@@ -20,10 +20,6 @@ Singleton {
         running: true
     }
 
-    Component.onCompleted: {
-        hyprQuery.exec();
-    }
-
     property var _internal: Item {
         Image {
             id: wallImage
@@ -32,13 +28,13 @@ Singleton {
         ColorQuantizer {
             id: quantizer
             source: wallImage.source
-            depth: 5 // Will produce 8 colors (2³)
+            depth: 8 // Will produce 8 colors (2³)
             rescaleSize: 64 // Rescale to 64x64 for faster processing
         }
     }
 
     component Transparency: QtObject {
-        property bool enabled: false
+        property bool enabled: true
         property real base: 1
         property real layers: 0.5
     }
@@ -48,18 +44,41 @@ Singleton {
     function getAverageLuminance() {
         let totalLum = 0;
         let colorList = quantizer.colors;
+        let total = 0;
+        let count = 0;
 
-        if (colorList.length === 0)
-            return 0.5; // Default fallback
+        for (const hex of colorList) {
+            if (!hex)
+                continue;
 
-        for (let i = 0; i < colorList.length; i++) {
-            let c = colorList[i];
-            // Standard Luminance Formula
-            let lum = (0.2126 * c.r) + (0.7152 * c.g) + (0.0722 * c.b);
-            totalLum += lum;
+            let r, g, b, a = 255;
+
+            if (hex.length === 7) { // #RRGGBB
+                r = parseInt(hex.slice(1, 3), 16);
+                g = parseInt(hex.slice(3, 5), 16);
+                b = parseInt(hex.slice(5, 7), 16);
+            } else if (hex.length === 9) { // #AARRGGBB
+                a = parseInt(hex.slice(1, 3), 16);
+                r = parseInt(hex.slice(3, 5), 16);
+                g = parseInt(hex.slice(5, 7), 16);
+                b = parseInt(hex.slice(7, 9), 16);
+            } else {
+                continue;
+            }
+
+            if (a === 0)
+                continue;
+
+            const rn = r / 255;
+            const gn = g / 255;
+            const bn = b / 255;
+
+            total += 0.299 * rn * rn + 0.587 * gn * gn + 0.114 * bn * bn;
+
+            count++;
         }
 
-        return totalLum / colorList.length;
+        return 0.8;
     }
 
     function getLuminance(c: color): real {
@@ -88,82 +107,62 @@ Singleton {
     }
 
     // 1. First, define the raw hex data component
+
     component M3RawData: QtObject {
-        property color m3primary_paletteKeyColor: "#a8627b"
-        property color m3secondary_paletteKeyColor: "#8e6f78"
-        property color m3tertiary_paletteKeyColor: "#986e4c"
-        property color m3neutral_paletteKeyColor: "#807477"
-        property color m3neutral_variant_paletteKeyColor: "#837377"
-
-        property color m3background: "#191114"
-        property color m3onBackground: "#efdfe2"
-
-        property color m3surface: "#191114"
-        property color m3surfaceDim: "#191114"
-        property color m3surfaceBright: "#403739"
-        property color m3surfaceContainerLowest: "#130c0e"
-        property color m3surfaceContainerLow: "#22191c"
-        property color m3surfaceContainer: "#261d20"
-        property color m3surfaceContainerHigh: "#31282a"
-        property color m3surfaceContainerHighest: "#3c3235"
-        property color m3onSurface: "#efdfe2"
-        property color m3surfaceVariant: "#514347"
-        property color m3onSurfaceVariant: "#d5c2c6"
-        property color m3inverseSurface: "#efdfe2"
-        property color m3inverseOnSurface: "#372e30"
-
-        property color m3outline: "#9e8c91"
-        property color m3outlineVariant: "#514347"
+        property color m3primary: "#FFD4B1"
+        property color m3surfaceTint: "#FDB879"
+        property color m3onPrimary: "#3C1E00"
+        property color m3primaryContainer: "#DF9E61"
+        property color m3onPrimaryContainer: "#351A00"
+        property color m3secondary: "#FCD5B6"
+        property color m3onSecondary: "#36210C"
+        property color m3secondaryContainer: "#AB8A6F"
+        property color m3onSecondaryContainer: "#000000"
+        property color m3tertiary: "#DBE290"
+        property color m3onTertiary: "#242800"
+        property color m3tertiaryContainer: "#AAB164"
+        property color m3onTertiaryContainer: "#202300"
+        property color m3error: "#FFD2CC"
+        property color m3onError: "#540003"
+        property color m3errorContainer: "#FF5449"
+        property color m3onErrorContainer: "#000000"
+        property color m3background: "#18120E"
+        property color m3onBackground: "#ECE0D9"
+        property color m3surface: "#18120E"
+        property color m3onSurface: "#FFFFFF"
+        property color m3surfaceVariant: "#51443A"
+        property color m3onSurfaceVariant: "#EDD9CA"
+        property color m3outline: "#C1AFA1"
+        property color m3outlineVariant: "#9E8D80"
         property color m3shadow: "#000000"
         property color m3scrim: "#000000"
-        property color m3surfaceTint: "#ffb0ca"
-
-        property color m3primary: "#ffb0ca"
-        property color m3onPrimary: "#541d34"
-        property color m3primaryContainer: "#6f334a"
-        property color m3onPrimaryContainer: "#ffd9e3"
-        property color m3inversePrimary: "#8b4a62"
-
-        property color m3secondary: "#e2bdc7"
-        property color m3onSecondary: "#422932"
-        property color m3secondaryContainer: "#5a3f48"
-        property color m3onSecondaryContainer: "#ffd9e3"
-
-        property color m3tertiary: "#f0bc95"
-        property color m3onTertiary: "#48290c"
-        property color m3tertiaryContainer: "#b58763"
-        property color m3onTertiaryContainer: "#000000"
-
-        property color m3error: "#ffb4ab"
-        property color m3onError: "#690005"
-        property color m3errorContainer: "#93000a"
-        property color m3onErrorContainer: "#ffdad6"
-
-        property color m3success: "#B5CCBA"
-        property color m3onSuccess: "#213528"
-        property color m3successContainer: "#374B3E"
-        property color m3onSuccessContainer: "#D1E9D6"
-
-        property color m3primaryFixed: "#ffd9e3"
-        property color m3primaryFixedDim: "#ffb0ca"
-        property color m3onPrimaryFixed: "#39071f"
-        property color m3onPrimaryFixedVariant: "#6f334a"
-
-        property color m3secondaryFixed: "#ffd9e3"
-        property color m3secondaryFixedDim: "#e2bdc7"
-        property color m3onSecondaryFixed: "#2b151d"
-        property color m3onSecondaryFixedVariant: "#5a3f48"
-
-        property color m3tertiaryFixed: "#ffdcc3"
-        property color m3tertiaryFixedDim: "#f0bc95"
-        property color m3onTertiaryFixed: "#2f1500"
-        property color m3onTertiaryFixedVariant: "#623f21"
+        property color m3inverseSurface: "#ECE0D9"
+        property color m3inverseOnSurface: "#2F2924"
+        property color m3inversePrimary: "#6B3D06"
+        property color m3primaryFixed: "#FFDCC0"
+        property color m3onPrimaryFixed: "#1E0D00"
+        property color m3primaryFixedDim: "#FDB879"
+        property color m3onPrimaryFixedVariant: "#532D00"
+        property color m3secondaryFixed: "#FFDCC0"
+        property color m3onSecondaryFixed: "#1E0D00"
+        property color m3secondaryFixedDim: "#E4C0A1"
+        property color m3onSecondaryFixedVariant: "#49311B"
+        property color m3tertiaryFixed: "#E1E995"
+        property color m3onTertiaryFixed: "#101300"
+        property color m3tertiaryFixedDim: "#C5CC7C"
+        property color m3onTertiaryFixedVariant: "#343900"
+        property color m3surfaceDim: "#18120E"
+        property color m3surfaceBright: "#4A433E"
+        property color m3surfaceContainerLowest: "#0B0704"
+        property color m3surfaceContainerLow: "#221C18"
+        property color m3surfaceContainer: "#2D2722"
+        property color m3surfaceContainerHigh: "#38312C"
+        property color m3surfaceContainerHighest: "#433C37"
     }
 
     property M3RawData rawData: M3RawData {}
 
     property QtObject palette: QtObject {
-        // Key Colors
         readonly property color m3primary_paletteKeyColor: themeManager.layer(themeManager.rawData.m3primary_paletteKeyColor)
         readonly property color m3secondary_paletteKeyColor: themeManager.layer(themeManager.rawData.m3secondary_paletteKeyColor)
         readonly property color m3tertiary_paletteKeyColor: themeManager.layer(themeManager.rawData.m3tertiary_paletteKeyColor)
@@ -173,8 +172,8 @@ Singleton {
         // Surfaces
         readonly property color m3background: themeManager.layer(themeManager.rawData.m3background, 2)
         readonly property color m3onBackground: themeManager.layer(themeManager.rawData.m3onBackground)
-        readonly property color m3surface: themeManager.layer(themeManager.rawData.m3surface, 0)
-        readonly property color m3surfaceDim: themeManager.layer(themeManager.rawData.m3surfaceDim, 0)
+        readonly property color m3surface: themeManager.layer(themeManager.rawData.m3surface, 2)
+        readonly property color m3surfaceDim: themeManager.layer(themeManager.rawData.m3surfaceDim, 2)
         readonly property color m3surfaceBright: themeManager.layer(themeManager.rawData.m3surfaceBright, 0)
         readonly property color m3surfaceContainerLowest: themeManager.layer(themeManager.rawData.m3surfaceContainerLowest)
         readonly property color m3surfaceContainerLow: themeManager.layer(themeManager.rawData.m3surfaceContainerLow)
@@ -189,8 +188,8 @@ Singleton {
         readonly property color m3inverseOnSurface: themeManager.layer(themeManager.rawData.m3inverseOnSurface)
 
         // Brand & Accents
-        readonly property color m3primary: themeManager.layer(themeManager.rawData.m3primary,2)
-        readonly property color m3onPrimary: themeManager.layer(themeManager.rawData.m3onPrimary,2)
+        readonly property color m3primary: themeManager.layer(themeManager.rawData.m3primary, 1)
+        readonly property color m3onPrimary: themeManager.layer(themeManager.rawData.m3onPrimary, 2)
         readonly property color m3primaryContainer: themeManager.layer(themeManager.rawData.m3primaryContainer)
         readonly property color m3onPrimaryContainer: themeManager.layer(themeManager.rawData.m3onPrimaryContainer)
         readonly property color m3inversePrimary: themeManager.layer(themeManager.rawData.m3inversePrimary)
