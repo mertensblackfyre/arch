@@ -1,142 +1,228 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import Quickshell
+import "../../components"
+import "../../services"
+import "../../themes"
 
-Scope {
+PopupWindow {
     id: root
-    property bool failed
-    property string errorString
 
     property var targetWidget
     required property rect position
     required property int expandDirection
     property bool shouldShow: false
 
-    // Connect to the Quickshell global to listen for the reload signals.
-    Connections {
-        target: Quickshell
+    visible: shouldShow || mainRect.opacity > 0
+    
+    // Transparent background for the window itself
+    color: "transparent"
 
-        function onShouldShowChanged() {
-            if (root.shouldShow) {
-                cont.mouseInside = false;
-            }
-        }
-
-        /*
-         
-        function onReloadCompleted() {
-            Quickshell.inhibitReloadPopup();
-            root.failed = false;
-            popupLoader.loading = true;
-            root.shouldShow = true;
-        }
-        function onReloadFailed(error: string) {
-            Quickshell.inhibitReloadPopup();
-            // Close any existing popup before making a new one.
-            root.shouldShow = false;
-            popupLoader.active = false;
-            root.failed = true;
-            root.errorString = error;
-            popupLoader.loading = true;
-        }
-        */
-    }
-    QtObject {
-        id: cont
-        property bool mouseInside: false
-        property bool mouseHasEntered: false
+    anchor {
+        item: root.targetWidget
+        rect: root.position
+        gravity: root.expandDirection
     }
 
-    // Keep the popup in a loader because it isn't needed most of the timeand will take up
-    // memory that could be used for something else.
-    LazyLoader {
-        id: popupLoader
+    Rectangle {
+        id: mainRect
+        implicitWidth: 320
+        implicitHeight: 450
+        color: ThemeManager.palette.m3surfaceContainer
+        radius: 20
+        border.color: ThemeManager.palette.m3outline
+        border.width: 1
 
-        PopupWindow {
-            id: popup
-            anchor {
-                item: root.targetWidget
-                rect: root.position
-                gravity: root.expandDirection
-            }
-            visible: root.shouldShow
+        // Glassmorphism effect (visual only, since real blur is expensive)
+        opacity: root.shouldShow ? 1 : 0
+        scale: root.shouldShow ? 1 : 0.95
+        
+        Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
+        Behavior on scale { NumberAnimation { duration: 200; easing.type: Easing.OutBack } }
 
-            width: rect.width
-            height: rect.height
+        ColumnLayout {
+            anchors.fill: parent
+            anchors.margins: 20
+            spacing: 15
 
-            // color blending is a bit odd as detailed in the type reference.
+            // Header
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 12
+                
+                MaterialIcon {
+                    text: "wifi"
+                    font.pixelSize: 24
+                    color: ThemeManager.palette.m3primary
+                }
 
-            Rectangle {
-                id: rect
-                color: root.failed ? "#40802020" : "#40009020"
-
-                implicitHeight: layout.implicitHeight + 50
-                implicitWidth: layout.implicitWidth + 30
-
-                // Fills the whole area of the rectangle, making any clicks go to it,
-                // which dismiss the popup.
+                StyledText {
+                    text: "Networks"
+                    font.pixelSize: 20
+                    font.bold: true
+                    Layout.fillWidth: true
+                    color: ThemeManager.palette.m3onSurface
+                }
+                
+                // Wifi Switch
                 MouseArea {
-                    id: mouseArea
-                    anchors.fill: parent
-                    onClicked: popupLoader.active = false
+                    id: wifiSwitch
+                    width: 44
+                    height: 24
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: NetworkService.toggleWifi()
+                    
+                    Rectangle {
+                        anchors.fill: parent
+                        radius: 12
+                        color: NetworkService.wifiEnabled ? ThemeManager.palette.m3primary : ThemeManager.palette.m3surfaceVariant
+                        
+                        Behavior on color { ColorAnimation { duration: 200 } }
 
-                    // makes the mouse area track mouse hovering, so the hide animation
-                    // can be paused when hovering.
-                    hoverEnabled: true
-                }
-
-                ColumnLayout {
-                    id: layout
-                    anchors {
-                        top: parent.top
-                        topMargin: 20
-                        horizontalCenter: parent.horizontalCenter
-                    }
-
-                    Text {
-                        text: root.failed ? "Reload failed." : "Reloaded completed!"
-                        color: "white"
-                    }
-
-                    Text {
-                        text: root.errorString
-                        color: "white"
-                        // When visible is false, it also takes up no space.
-                        visible: root.errorString != ""
+                        Rectangle {
+                            width: 18
+                            height: 18
+                            radius: 9
+                            anchors.verticalCenter: parent.verticalCenter
+                            x: NetworkService.wifiEnabled ? 24 : 2
+                            color: NetworkService.wifiEnabled ? ThemeManager.palette.m3onPrimary : ThemeManager.palette.m3onSurfaceVariant
+                            
+                            Behavior on x { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
+                        }
                     }
                 }
+            }
 
-                // A progress bar on the bottom of the screen, showing how long until the
-                // popup is removed.
+            // Divider
+            Rectangle {
+                Layout.fillWidth: true
+                height: 1
+                color: ThemeManager.palette.m3outlineVariant
+                opacity: 0.5
+            }
+
+            // Network List
+            ListView {
+                id: networkList
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                clip: true
+                model: NetworkService.friendlyWifiNetworks
+                spacing: 8
+                
+                ScrollBar.vertical: ScrollBar {
+                    width: 4
+                    policy: ScrollBar.AsNeeded
+                }
+
+                delegate: Rectangle {
+                    id: delegateRoot
+                    width: networkList.width
+                    height: 56
+                    radius: 12
+                    color: modelData.active ? ThemeManager.palette.m3primaryContainer : (itemMouse.containsMouse ? ThemeManager.palette.m3surfaceContainerHigh : "transparent")
+                    
+                    Behavior on color { ColorAnimation { duration: 150 } }
+
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.margins: 12
+                        spacing: 12
+                        
+                        MaterialIcon {
+                            text: modelData.active ? "signal_wifi_4_bar" : "network_wifi"
+                            font.pixelSize: 20
+                            color: modelData.active ? ThemeManager.palette.m3onPrimaryContainer : ThemeManager.palette.m3onSurface
+                        }
+                        
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            spacing: 2
+                            
+                            StyledText {
+                                text: modelData.ssid || "Unknown Network"
+                                font.pixelSize: 14
+                                font.bold: modelData.active
+                                color: modelData.active ? ThemeManager.palette.m3onPrimaryContainer : ThemeManager.palette.m3onSurface
+                                elide: Text.ElideRight
+                                Layout.fillWidth: true
+                            }
+                            
+                            StyledText {
+                                text: modelData.isSecure ? "Secure" : "Open"
+                                font.pixelSize: 11
+                                opacity: 0.7
+                                color: modelData.active ? ThemeManager.palette.m3onPrimaryContainer : ThemeManager.palette.m3onSurface
+                            }
+                        }
+
+                        StyledText {
+                            text: modelData.strength + "%"
+                            font.pixelSize: 12
+                            color: modelData.active ? ThemeManager.palette.m3onPrimaryContainer : ThemeManager.palette.m3onSurface
+                        }
+                    }
+                    
+                    MouseArea {
+                        id: itemMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            if (!modelData.active) {
+                                NetworkService.connectToWifiNetwork(modelData)
+                            }
+                        }
+                    }
+                }
+
+                footer: Item {
+                    width: networkList.width
+                    height: 10
+                }
+            }
+            
+            // Actions
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 10
+
+                // Rescan Button
                 Rectangle {
-                    id: bar
-                    color: "#20ffffff"
-                    anchors.bottom: parent.bottom
-                    anchors.left: parent.left
-                    height: 20
+                    Layout.fillWidth: true
+                    height: 48
+                    radius: 24
+                    color: rescanMouse.containsMouse ? ThemeManager.palette.m3primary : ThemeManager.palette.m3secondaryContainer
+                    
+                    Behavior on color { ColorAnimation { duration: 150 } }
 
-                    PropertyAnimation {
-                        id: anim
-                        target: bar
-                        property: "width"
-                        from: rect.width
-                        to: 0
-                        duration: root.failed ? 10000 : 800
-                        onFinished: popupLoader.active = false
+                    RowLayout {
+                        anchors.centerIn: parent
+                        spacing: 8
+                        
+                        MaterialIcon {
+                            text: "refresh"
+                            font.pixelSize: 18
+                            color: rescanMouse.containsMouse ? ThemeManager.palette.m3onPrimary : ThemeManager.palette.m3onSecondaryContainer
+                        }
 
-                        // Pause the animation when the mouse is hovering over the popup,
-                        // so it stays onscreen while reading. This updates reactively
-                        // when the mouse moves on and off the popup.
-                        paused: mouseArea.containsMouse
+                        StyledText {
+                            text: "Rescan"
+                            font.bold: true
+                            color: rescanMouse.containsMouse ? ThemeManager.palette.m3onPrimary : ThemeManager.palette.m3onSecondaryContainer
+                        }
+                    }
+                    
+                    MouseArea {
+                        id: rescanMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: NetworkService.rescanWifi()
                     }
                 }
-
-                // We could set `running: true` inside the animation, but the width of the
-                // rectangle might not be calculated yet, due to the layout.
-                // In the `Component.onCompleted` event handler, all of the component's
-                // properties and children have been initialized.
-                Component.onCompleted: anim.start()
             }
         }
     }

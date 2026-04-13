@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import Quickshell
 import "../../components/"
 import "../../services/"
 
@@ -35,10 +36,10 @@ Item {
             console.log("Popup is now:", root.networkPopup);
         }
     }
-
     NetworkPop {
-        expandDirection: 200
-        position: icc
         targetWidget: root
+        shouldShow: root.networkPopup
+        position: Qt.rect(0, 0, root.width, root.height)
+        expandDirection: Edges.Right
     }
 }
