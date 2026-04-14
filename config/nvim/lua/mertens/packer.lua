@@ -41,7 +41,7 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.4',
+        'nvim-telescope/telescope.nvim',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use {
@@ -59,7 +59,6 @@ return require('packer').startup(function(use)
     })
 
     use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-    use("nvim-treesitter/playground")
     use("theprimeagen/harpoon")
     use("theprimeagen/refactoring.nvim")
     use("mbbill/undotree")

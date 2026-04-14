@@ -12,7 +12,6 @@ Item {
 
     readonly property bool isHovered: mouseArea.containsMouse
 
-    property var barWindow
     property bool networkPopup: false
 
     MaterialIcon {
@@ -32,14 +31,19 @@ Item {
         hoverEnabled: true
 
         onClicked: {
-            root.networkPopup = !root.networkPopup;
-            console.log("Popup is now:", root.networkPopup);
+            if (!root.Quickshell.window) {
+                console.warn("No window yet!");
+                return;
+            }
+            const mapped = root.mapToItem(null, 0, 0);
+            popup.anchorRect = Qt.rect(mapped.x, mapped.y, root.width, root.height);
+            popup.shouldShow = !popup.shouldShow;
         }
     }
     NetworkPop {
+        id: popup
         targetWidget: root
         shouldShow: root.networkPopup
-        position: Qt.rect(0, 0, root.width, root.height)
         expandDirection: Edges.Right
     }
 }
