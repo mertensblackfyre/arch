@@ -30,6 +30,6 @@ yay -Sy hyprshot tofi
 sudo pacman -S flatpak
 
 sudo pacman -S ghostty
-sudo pacman -S waybar hyprland hyprpaper hyprlock
+sudo pacman -S hyprland hyprpaper hyprlock hyprsunset
 
 sudo systemctl enable --now ly
