@@ -28,8 +28,9 @@ sudo pacman -S ncdu nginx-mainline ufw openvpn btop fzf discord
 yay -S  wireguard-arch wireguard-tools
 yay -Sy hyprshot tofi apple-fonts material-symbols-font
 sudo pacman -S flatpak
+yay -S apple-fonts
 
-sudo pacman -S ghostty brave 
+sudo pacman -S ghostty brave spotify-launcher
 sudo pacman -S hyprland hyprpaper hyprlock hyprsunset
 
 sudo systemctl enable --now ly
