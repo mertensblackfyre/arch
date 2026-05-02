@@ -2,7 +2,7 @@
 sudo pacman -Syu
 sudo pacman -S dosfstools mtools os-prober base-devel autoconf git
 sudo pacman -S wget pulseaudio unzip resolvconf pavucontrol
-sudo pacman -S nautilus gvfs gvfs-afc
+sudo pacman -S yazi gvfs gvfs-afc
 sudo pacman -S mtpfs libmtp gvfs-mtp zathura-pdf-mupdf zathura
 
 echo "Installing Dev enviroment" | cowsay 
@@ -24,13 +24,13 @@ echo "Installing programming languages" | cowsay
 sudo pacman -S go gcc cmake make pyright gopls
 
 echo "Installing utils" | cowsay 
-sudo pacman -S ncdu nginx-mainline ufw openvpn btop fzf discord
+sudo pacman -S ncdu nginx-mainline ufw openvpn btop fzf discord tree fzf
 yay -S  wireguard-arch wireguard-tools
 yay -Sy hyprshot tofi apple-fonts material-symbols-font
 sudo pacman -S flatpak
-yay -S apple-fonts
 
 sudo pacman -S ghostty brave spotify-launcher
 sudo pacman -S hyprland hyprpaper hyprlock hyprsunset
+sudo pacman -S python-pip python-pipx
 
 sudo systemctl enable --now ly
