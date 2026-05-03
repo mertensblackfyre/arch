@@ -29,7 +29,7 @@ yay -S  wireguard-arch wireguard-tools
 yay -Sy hyprshot tofi apple-fonts material-symbols-font
 sudo pacman -S flatpak
 
-sudo pacman -S ghostty brave spotify-launcher
+sudo pacman -S ghostty brave spotify-launcher syncthing
 sudo pacman -S hyprland hyprpaper hyprlock hyprsunset
 sudo pacman -S python-pip python-pipx
 
