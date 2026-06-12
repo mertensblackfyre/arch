@@ -1,73 +1,163 @@
+// NetworkPop.qml - WiFi/Network popup using PopupContainer
+//
+//
 pragma ComponentBehavior: Bound
 import QtQuick
-import Quickshell
+import QtQuick.Layouts
+import "../../components/"
 
-PopupWindow {
+Item {
     id: root
 
-    // Required properties that the parent must provide
-    required property var targetWidget          // The item that triggered this popup
-    required property rect anchorRect           // Widget's geometry in window coordinates
-    required property int expandDirection       // Which side to pop out from
+    // Reference to the button/anchor that triggers this popup
+    property Item anchorItem: null
+    property var networkService: null
 
-    // Simple visibility control
-    property bool shouldShow: false
+    // State
+    property bool popupOpen: false
 
-    // Show window when shouldShow is true OR while animating out
-    visible: shouldShow || popupBox.opacity > 0
+    PopupContainer {
+        id: networkPopup
+        isOpen: root.popupOpen
+        anchor: root.anchorItem
+        backgroundColor: "#1e1e1e"
+        cornerRadius: 12
+        verticalOffset: 12
 
-    // Transparent window background
-    color: "transparent"
+        contentComponent: Component {
+            Item {
+                width: 300
+                height: networkList.childrenRect.height + 20
 
-    // Anchor the popup relative to the target widget's window
-    anchor {
-        item: root.targetWidget
-        rect: root.anchorRect
-        gravity: root.expandDirection
+                Column {
+                    id: networkList
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: parent.top
+                        margins: 10
+                    }
+                    spacing: 8
+
+                    // Header
+                    Text {
+                        color: "#ffffff"
+                        font.pixelSize: 14
+                        font.bold: true
+                        text: "Available Networks"
+                    }
+
+                    Rectangle {
+                        width: parent.width
+                        height: 1
+                        color: "#404040"
+                    }
+
+                    // Network list items
+                    Repeater {
+                        model: root.networkService?.networks ?? []
+
+                        delegate: Rectangle {
+                            width: networkList.width
+                            height: 44
+                            color: networkMouse.containsMouse ? "#303030" : "transparent"
+                            radius: 6
+
+                            Row {
+                                anchors {
+                                    fill: parent
+                                    leftMargin: 10
+                                    rightMargin: 10
+                                }
+                                spacing: 10
+
+                                // Signal strength icon
+                                Text {
+                                    text: modelData.signalStrength >= 75 ? "⚡⚡⚡" : modelData.signalStrength >= 50 ? "⚡⚡" : modelData.signalStrength >= 25 ? "⚡" : "○"
+                                    color: "#888888"
+                                    font.pixelSize: 12
+                                    verticalAlignment: Text.AlignVCenter
+                                }
+
+                                // Network name
+                                Text {
+                                    text: modelData.name
+                                    color: "#ffffff"
+                                    font.pixelSize: 13
+                                    verticalAlignment: Text.AlignVCenter
+                                    elide: Text.ElideRight
+                                    Layout.fillWidth: true
+                                }
+
+                                // Lock icon if secured
+                                Text {
+                                    text: modelData.secured ? "🔒" : ""
+                                    color: "#888888"
+                                    font.pixelSize: 12
+                                    verticalAlignment: Text.AlignVCenter
+                                }
+                            }
+
+                            MouseArea {
+                                id: networkMouse
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                onClicked: {
+                                    root.networkService?.connectToNetwork(modelData.ssid);
+                                    root.popupOpen = false;
+                                }
+                            }
+                        }
+                    }
+
+                    // Empty state
+                    Text {
+                        visible: (root.networkService?.networks?.length ?? 0) === 0
+                        text: "No networks available"
+                        color: "#888888"
+                        font.pixelSize: 12
+                    }
+
+                    Rectangle {
+                        width: parent.width
+                        height: 1
+                        color: "#404040"
+                    }
+
+                    // Settings button
+                    Rectangle {
+                        width: networkList.width
+                        height: 40
+                        color: "#0066cc"
+                        radius: 6
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: "Network Settings"
+                            color: "#ffffff"
+                            font.pixelSize: 13
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                // Trigger settings or action
+                                root.networkService?.openSettings?.();
+                                root.popupOpen = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        onCloseRequested: {
+            root.popupOpen = false;
+        }
     }
 
-    // The actual visible content
-    Rectangle {
-        id: popupBox
-        anchors.centerIn: parent
-
-        width: 300
-        height: 200
-        radius: 16
-        color: "#2d2d2d"
-        border.color: "#555555"
-        border.width: 1
-
-        // Simple fade + scale animation
-        opacity: root.shouldShow ? 1 : 0
-        scale: root.shouldShow ? 1 : 0.9
-
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 200
-                easing.type: Easing.OutCubic
-            }
-        }
-        Behavior on scale {
-            NumberAnimation {
-                duration: 200
-                easing.type: Easing.OutBack
-            }
-        }
-
-        // Centered text
-        Text {
-            anchors.centerIn: parent
-            text: "I'm a popup!"
-            color: "white"
-            font.pixelSize: 18
-        }
-
-        // Clicking outside closes it (optional)
-        MouseArea {
-            anchors.fill: parent
-            z: -1  // Behind the box, catches clicks on empty window area
-            onClicked: root.shouldShow = false
-        }
+    // Function to toggle popup
+    function togglePopup() {
+        root.popupOpen = !root.popupOpen;
     }
 }

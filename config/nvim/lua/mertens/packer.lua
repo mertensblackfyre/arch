@@ -16,13 +16,13 @@ return require('packer').startup(function(use)
 
 
     use { "scottmckendry/cyberdream.nvim" }
+
     -- Themses
     -- use { "vague2k/vague.nvim" }
     use { "EdenEast/nightfox.nvim" }
     --use { 'decaycs/decay.nvim', as = 'decay' }
     --use "tjdevries/colorbuddy.nvim"
-
-
+use {"dchinmay2/alabaster.nvim"}
     use 'andweeb/presence.nvim'
 
     use {

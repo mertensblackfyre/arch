@@ -1,4 +1,3 @@
-
 import QtQuick
 import "../configs/" as Config
 
