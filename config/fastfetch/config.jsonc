@@ -1,0 +1,130 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "kitty",
+    "source": "/home/omer/Downloads/NicePng_pokemon-pikachu-png_9121936.png",
+    "width": 30, // Width in characters
+    "height": 10, // Height in characters
+    "padding": {
+      "top": 1, // Top padding
+      "left": 1, // Left padding
+      "right": 2 // Right padding
+    },
+    "color": { // Override logo colors
+      "1": "blue",
+      "2": "green"
+    }
+  },
+  "display": {
+    "separator": " ", // Separator between keys and values
+    "color": {
+      "keys": "blue", // Key color
+      "title": "red" // Title color
+    },
+    "key": {
+      "width": 12, // Aligns keys to this width
+      "type": "both" // string, icon, both, or none
+    },
+    "bar": {
+      "width": 10, // Width of percentage bars
+      "char": {
+        "elapsed": "■", // Character for elapsed portion
+        "total": "-", // Character for total portion
+      },
+    },
+    "percent": {
+      "type": 9, // 1=number, 2=bar, 3=both, 9=colored number
+      "color": {
+        "green": "green",
+        "yellow": "light_yellow",
+        "red": "light_red"
+      }
+    }
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": "╭──────────────────────────────────────"
+    },
+    {
+      "key": " user ",
+      "type": "title",
+      "format": "{user-name}",
+      "keyColor": "31"
+    },
+    {
+      "key": "│",
+      "type": "host",
+      "key": " hname",
+      "keyColor": "32"
+    },
+    {
+      "key": "│",
+      "type": "uptime",
+      "key": " uptime",
+      "keyColor": "33"
+    },
+    {
+      "type": "custom",
+      "format": "╰──────────────────────────────────────"
+    },
+    {
+      "type": "custom",
+      "format": "╭──────────────────────────────────────"
+    },
+    {
+      "key": "│",
+      "type": "os",
+      "key": " distro",
+      "keyColor": "34"
+    },
+    {
+      "key": "│",
+      "type": "kernel",
+      "key": " kernel",
+      "keyColor": "35"
+    },
+    {
+      "key": "│",
+      "type": "terminal",
+      "key": " term ",
+      "keyColor": "36"
+    },
+    {
+      "key": "│",
+      "type": "shell",
+      "key": " shell ",
+      "keyColor": "37"
+    },
+    {
+      "type": "custom",
+      "format": "╰──────────────────────────────────────"
+    },
+    {
+      "type": "custom",
+      "format": "╭──────────────────────────────────────"
+    },
+    {
+      "key": "│",
+      "type": "cpu",
+      "key": " cpu ",
+      "keyColor": "34"
+    },
+    {
+      "key": "│",
+      "type": "disk",
+      "key": " disk ",
+      "keyColor": "35"
+    },
+    {
+      "key": "│",
+      "type": "memory",
+      "key": " memory",
+      "keyColor": "36"
+    },
+    {
+      "type": "custom",
+      "format": "╰──────────────────────────────────────"
+    }
+  ]
+}
