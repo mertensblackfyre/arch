@@ -20,5 +20,8 @@ for dir in nvim hypr ghostty tofi quickshell fastfetch tmux; do
   fi
 done
 
+
+
+
 echo "Configuration sync complete."
 
