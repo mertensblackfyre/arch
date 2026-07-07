@@ -1,5 +1,4 @@
 
-vim.cmd([[ colorscheme cyberdream ]])
 
 require('nightfox').setup({
     options = {

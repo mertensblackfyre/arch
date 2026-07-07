@@ -1,12 +1,11 @@
-#
 # ~/.bashrc
-#
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-PS1='[\u@\h \W]\$ '
+PS1='\u@\h:\033[38;2;12;183;175m\w\033[0m$ '
+#PS1='[\u@\h \W]\$ '
 
+export CLICOLOR=1
 case $- in
     *i*) ;;
       *) return;;
@@ -74,6 +73,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -z "$TMUX" ]; then
+    tmux
+fi
+
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -81,3 +84,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# Created by `pipx` on 2026-05-03 11:44:38
+export PATH="$PATH:/home/mertens/.local/bin"

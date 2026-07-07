@@ -22,6 +22,9 @@ done
 
 
 
+rm ../.bashrc
+cp ~/.bashrc ../
+
 
 echo "Configuration sync complete."
 
