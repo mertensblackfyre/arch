@@ -2,65 +2,40 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
+import "../../widgets" as Widgets
+import "../../config" as Config
 
-import "../../components"
-import "../../themes"
 
 PanelWindow {
     id: root
     anchors.top: true
     anchors.left: true
     anchors.bottom: true
-    implicitWidth: 40 // Keeping your width exactly as requested
-
-    mask: null
+    implicitWidth: 40
+    exclusiveZone: 40
     color: "transparent"
 
     Rectangle {
         id: barBackground
-        anchors.fill: parent
-        color: ThemeManager.rawData.m3background
-
+        width: parent.width
+        height: parent.height
         topRightRadius: 55
         bottomRightRadius: 55
 
+        color: Config.Theme.background
         ColumnLayout {
             anchors.fill: parent
             spacing: 10
 
-            PillContainer {
-                id: a
+            Widgets.Pill {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 10
-                WorkSpaces {}
+                color:Config.Theme.surfaceContainer
+                Workspaces {}
             }
 
-            Item {
-                Layout.fillHeight: true
+            Item { Layout.fillHeight: true }
             }
 
-            PillContainer {
-                id: b
-                Layout.alignment: Qt.AlignHCenter
-                ActiveWindow {
-                    bar: barBackground
-                }
-            }
-
-            Item {
-                Layout.fillHeight: true
-            }
-
-            PillContainer {
-                id: c
-                Layout.alignment: Qt.AlignHCenter
-                Layout.bottomMargin: 10
-                Wifi {}
-                BatteryIndicator {
-                    parent_window: root
-                }
-                Time {}
-            }
-        }
     }
 }

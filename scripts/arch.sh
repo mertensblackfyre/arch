@@ -33,4 +33,6 @@ sudo pacman -S ghostty brave spotify-launcher syncthing
 sudo pacman -S hyprland hyprpaper hyprlock hyprsunset
 sudo pacman -S python-pip python-pipx
 
+flatpak install flathub one.ablaze.floorp
+
 sudo systemctl enable --now ly
