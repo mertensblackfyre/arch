@@ -1,3 +1,4 @@
 module services
 
 singleton Hyprland 1.0 Hyprland.qml
+singleton Icons 1.0 Icons.qml

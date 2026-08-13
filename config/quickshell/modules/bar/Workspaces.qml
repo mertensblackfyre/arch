@@ -2,6 +2,7 @@
 import Quickshell.Hyprland
 import QtQuick
 import "../../config" as Config
+import "../../widgets" as Widgets
 
 Column {
     id: root
@@ -9,8 +10,8 @@ Column {
 
     Repeater {
         model: {
-            let ws = [...Hyprland.workspaces.values]
-            return ws.sort((a, b) => a.id - b.id)
+            let ws = [...Hyprland.workspaces.values];
+            return ws.sort((a, b) => a.id - b.id);
         }
 
         Text {
@@ -19,7 +20,7 @@ Column {
 
             function toJapanese(num) {
                 const kanji = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
-                return kanji[num - 1] || num.toString()
+                return kanji[num - 1] || num.toString();
             }
 
             text: toJapanese(modelData.id)
@@ -27,9 +28,13 @@ Column {
             font.pixelSize: 15
             font.bold: true
 
-            Behavior on color { ColorAnimation { duration: 150 } }
+            Behavior on color {
+                Widgets.ColorAnim {}
+            }
 
-            HoverHandler { id: hoverHandler }
+            HoverHandler {
+                id: hoverHandler
+            }
 
             MouseArea {
                 anchors.fill: parent

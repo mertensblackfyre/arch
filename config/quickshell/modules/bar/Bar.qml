@@ -5,14 +5,12 @@ import QtQuick.Layouts
 import "../../widgets" as Widgets
 import "../../config" as Config
 
-
 PanelWindow {
     id: root
     anchors.top: true
     anchors.left: true
     anchors.bottom: true
     implicitWidth: 40
-    exclusiveZone: 40
     color: "transparent"
 
     Rectangle {
@@ -22,6 +20,7 @@ PanelWindow {
         topRightRadius: 55
         bottomRightRadius: 55
 
+        //color: "transparent"
         color: Config.Theme.background
         ColumnLayout {
             anchors.fill: parent
@@ -30,12 +29,34 @@ PanelWindow {
             Widgets.Pill {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 10
-                color:Config.Theme.surfaceContainer
+                color: Config.Theme.surfaceContainer
                 Workspaces {}
             }
 
-            Item { Layout.fillHeight: true }
+            Item {
+                Layout.fillHeight: true
             }
 
+            Widgets.Pill {
+                Layout.alignment: Qt.AlignHCenter
+                color: Config.Theme.surfaceContainer
+                ActiveWindow {}
+            }
+
+            Item {
+                Layout.fillHeight: true
+            }
+
+            Widgets.Pill {
+                implicitHeight: 120
+                color: Config.Theme.surfaceContainer
+                Layout.alignment: Qt.AlignHCenter
+                Layout.bottomMargin: 10
+
+                Wifi {}
+                Battery {}
+                Clock {}
+            }
+        }
     }
 }

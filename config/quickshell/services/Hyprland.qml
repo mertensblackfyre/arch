@@ -1,11 +1,9 @@
 pragma Singleton
 pragma ComponentBehavior: Bound
-
 import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
-
 
 Singleton {
     id: root
@@ -20,30 +18,12 @@ Singleton {
     readonly property HyprlandMonitor focusedMonitor: Hyprland.focusedMonitor
     readonly property int activeWsId: focusedWorkspace?.id ?? 1
 
-    function updateActiveWindow() {
-        getActiveWindow.running = true;
-    }
-
-    function getTruncatedTitle(maxLength = 30) {
-        if (!activeWindow || !activeWindow.title)
-            return "";
-        const title = activeWindow.title;
-
-        return activeWindow.title;
-    //return title.length > maxLength ? title.substring(0, maxLength) + "..." : title;
-    }
-
-    Component.onCompleted: {
-        updateActiveWindow();
-    }
-
     Connections {
         target: Hyprland
 
         function onRawEvent(event) {
             if (["openlayer", "closelayer", "screencast"].includes(event.name))
                 return;
-            root.updateActiveWindow();
         }
     }
 

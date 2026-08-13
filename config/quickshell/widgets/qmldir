@@ -1,5 +1,7 @@
 module widgets
 
-Animation 1.0 Animation.qml
-ColorAnimation 1.0 ColorAnimation.qml
+StyledText 1.0 StyledText.qml
 Pill 1.0 Pill.qml
+Anim 1.0 Anim.qml
+ColorAnim 1.0 ColorAnim.qml
+MaterialIcon 1.0 MaterialIcon.qml
