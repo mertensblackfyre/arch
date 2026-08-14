@@ -1,63 +1,75 @@
 // modules/popup/PopupLayer.qml
 import Quickshell
 import QtQuick
-import QtQuick.Layouts
-import "../../services" as Services
-import "../wifi"
+import "../../widgets" as Widgets
+import "../../config" as Config
 
 PanelWindow {
     id: root
 
-    anchors.left: true
-    anchors.top: true
-    anchors.bottom: true
-    margins.left: 48
-    exclusiveZone: -1
-    aboveWindows: true
-    color: "transparent"
+     property bool open: false
+     property Component contentComponent: null
+     property int panelWidth: 264
+     property int panelMargins: 8
+     property int windowWidth: 280
+     property bool closeOnOutsideClick: true
+     signal outsideClicked()
 
-    visible: Services.ShellState.activePopup !== ""
-    implicitWidth: 280
+     anchors.left: true
+     anchors.top: true
+     anchors.bottom: true
+     margins.left: 48
+     exclusiveZone: -1
+     aboveWindows: true
+     color: "red"
 
-    // close on outside click
-    MouseArea {
-        anchors.fill: parent
-        onClicked: Services.ShellState.close()
-    }
+     visible: true
+     implicitWidth: windowWidth
 
-    Rectangle {
-        id: panel
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.margins: 8
-        width: 264
-        height: content.implicitHeight + 24
-        radius: 16
-        color: "#271d1d"
+     MouseArea {
+         anchors.fill: parent
+         onClicked: {
+             if (root.closeOnOutsideClick) {
+                 root.outsideClicked()
+             }
+         }
+     }
 
-        // stop outside click from propagating through
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {}
-        }
+      Rectangle {
+          id: panel
+          anchors.top: parent.top
+          anchors.left: parent.left
+          anchors.margins: root.panelMargins
+          width: root.panelWidth
+          height: content.implicitHeight + 24
+          radius: 16
+          color: Config.Theme.background
 
-        Loader {
-            id: content
-            anchors.fill: parent
-            anchors.margins: 12
-            sourceComponent: {
-                switch (Services.ShellState.activePopup) {
-                    case "wifi": return wifiPopup
-                    default: return null
-                }
-            }
-        }
-    }
+          // Prevent outside‑click closing when clicking inside the panel
+          MouseArea {
+              anchors.fill: parent
+              onClicked: {}
+          }
 
-    PopupSlide {
-        target: panel
-        open: Services.ShellState.activePopup !== ""
-    }
+          Loader {
+              id: content
+              anchors.fill: parent
+              anchors.margins: 12
+              sourceComponent: root.contentComponent
+          }
 
-    Component { id: wifiPopup; NetworkList {} }
+          Behavior on width {
+              Widgets.Anim { duration: Config.Appearance.anim.durations.small }
+          }
+          Behavior on height {
+              Widgets.Anim { duration: Config.Appearance.anim.durations.small }
+          }
+      }
+
+
+
+      Behavior on implicitWidth {
+             Widgets.Anim {}
+         }
+
 }

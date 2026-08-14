@@ -24,8 +24,5 @@ Item {
         color: root.connected ? "white" : "gray"
     }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: Services.ShellState.toggle("wifi")
-    }
+
 }

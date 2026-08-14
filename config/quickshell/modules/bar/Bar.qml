@@ -4,32 +4,34 @@ import QtQuick
 import QtQuick.Layouts
 import "../../widgets" as Widgets
 import "../../config" as Config
+import "../../services" as Services
+import "../popup" as Pop
 
 PanelWindow {
     id: root
     anchors.top: true
     anchors.left: true
     anchors.bottom: true
-    implicitWidth: 40
+    implicitWidth: 35
+      property bool showPopup: false
     color: "transparent"
 
     Rectangle {
         id: barBackground
         width: parent.width
         height: parent.height
-        topRightRadius: 55
-        bottomRightRadius: 55
 
-        //color: "transparent"
-        color: Config.Theme.background
+        color: "transparent"
+
         ColumnLayout {
             anchors.fill: parent
             spacing: 10
 
             Widgets.Pill {
                 Layout.alignment: Qt.AlignHCenter
-                Layout.topMargin: 10
                 color: Config.Theme.surfaceContainer
+                topRightRadius: Config.Appearance.rounding.normal
+                bottomRightRadius: Config.Appearance.rounding.normal
                 Workspaces {}
             }
 
@@ -40,6 +42,9 @@ PanelWindow {
             Widgets.Pill {
                 Layout.alignment: Qt.AlignHCenter
                 color: Config.Theme.surfaceContainer
+
+                topRightRadius: Config.Appearance.rounding.normal
+                bottomRightRadius: Config.Appearance.rounding.normal
                 ActiveWindow {}
             }
 
@@ -48,15 +53,29 @@ PanelWindow {
             }
 
             Widgets.Pill {
-                implicitHeight: 120
-                color: Config.Theme.surfaceContainer
-                Layout.alignment: Qt.AlignHCenter
-                Layout.bottomMargin: 10
+                implicitHeight: _height - Config.Appearance.padding.normal
+                color: Config.Theme.background
+                topRightRadius: Config.Appearance.rounding.normal
+                bottomRightRadius: Config.Appearance.rounding.normal
+                contentSpacing:5
+                Widgets.Pill {
+                    hoverAllowed: true
+                    cornerRadius: Config.Appearance.rounding.normal
 
-                Wifi {}
-                Battery {}
-                Clock {}
+                    Battery {}
+                    Wifi {}
+                    Battery {}
+
+                }
+                Widgets.Pill {
+                    hoverAllowed: true
+                    implicitWidth: root.width - 8
+                    cornerRadius: Config.Appearance.rounding.normal
+                    Clock {}
+                }
             }
+
+
         }
     }
 }

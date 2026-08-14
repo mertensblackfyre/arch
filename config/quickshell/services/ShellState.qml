@@ -5,7 +5,7 @@ import Quickshell
 Singleton {
     id: root
 
-    property string activePopup: ""  // "wifi" | "battery" | "volume" | ""
+    property string activePopup: ""
 
     function toggle(name) {
         activePopup = activePopup === name ? "" : name

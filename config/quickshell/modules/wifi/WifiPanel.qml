@@ -18,7 +18,7 @@ PanelWindow {
     implicitWidth: Services.PopupService.popupWidth
     margins.left: 48
 
-    color: "transparent"
+    color: "red"
     exclusiveZone: -1  // don't push windows
     visible: isOpen
     aboveWindows: true
@@ -61,8 +61,6 @@ PanelWindow {
 
             // Network list
             NetworkList {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
                }
         }
     }

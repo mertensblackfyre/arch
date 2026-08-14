@@ -47,7 +47,7 @@ Item {
 
     TextMetrics {
         id: metrics
-        text: root.getTruncatedTitle(25) ?? "Desktop"
+        text: root.getTruncatedTitle(20) ?? "Desktop"
         font.pointSize: Config.Appearance.font.size.smaller
         font.family: Config.Appearance.font.family.mono
 

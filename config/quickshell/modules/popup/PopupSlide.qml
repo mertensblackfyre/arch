@@ -1,7 +1,9 @@
 // modules/popup/PopupSlide.qml
 import QtQuick
+import "../../widgets" as Widgets
 
 Item {
+    id:root
     property var target
     property bool open: false
 
@@ -14,21 +16,17 @@ Item {
         }
     }
 
-    NumberAnimation {
+    Widgets.Anim{
         id: slideIn
-        target: parent.target
+        target: root.target
         property: "x"
         to: 0
-        duration: 300
-        easing.type: Easing.OutCubic
     }
 
-    NumberAnimation {
+    Widgets.Anim {
         id: slideOut
-        target: parent.target
+        target: root.target
         property: "x"
-        to: -parent.target.width
-        duration: 250
-        easing.type: Easing.InCubic
+        to: -root.target.width
     }
 }
