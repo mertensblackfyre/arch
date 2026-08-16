@@ -3,6 +3,7 @@ import "modules/bar"
 import "modules/popup"
 import "modules/wifi"
 import "services" as Services
+import "config" as Config
 import QtQuick
 
 ShellRoot {
@@ -16,6 +17,9 @@ ShellRoot {
         id:pop
     }
 
+    Component.onCompleted: {
+        Qt.callLater(() => console.log(Config.Theme.background))
+    }
 
 
 }
