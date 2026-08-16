@@ -16,6 +16,8 @@ Text {
     textFormat: Text.PlainText
     font.family: Config.Appearance.font.family.sans
 
+    color: Config.Theme.inverseOnSurface
+
     Behavior on color {
         ColorAnim {}
     }

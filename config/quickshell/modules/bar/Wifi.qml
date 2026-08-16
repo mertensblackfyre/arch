@@ -4,6 +4,7 @@ import Quickshell.Networking
 import "../../widgets" as Widgets
 import "../../services" as Services
 import "../wifi" as Wifi
+
 Item {
     id: root
 
@@ -16,12 +17,9 @@ Item {
     implicitWidth: icon.implicitWidth
     implicitHeight: icon.implicitHeight
 
-
     Widgets.MaterialIcon {
         id: icon
         text: Services.Icons.getNetworkIcon(root.strength, root.secured)
-        color: root.connected ? "white" : "gray"
+        //color: root.connected ? "white" : "gray"
     }
-
-
 }

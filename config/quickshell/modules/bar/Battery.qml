@@ -26,10 +26,9 @@ Widgets.MaterialIcon {
     }
 
     color: {
-        if (charging)
-            return Config.Theme.primary;
+        // if (charging)
+        //   return Config.Theme.primary;
         if (percent <= 20)
             return Config.Theme.error;
-        return "white";
     }
 }

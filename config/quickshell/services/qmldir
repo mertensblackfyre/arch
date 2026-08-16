@@ -2,5 +2,5 @@ module services
 
 singleton Hyprland 1.0 Hyprland.qml
 singleton Icons 1.0 Icons.qml
-
+singleton Network 1.0 Network.qml
 singleton ShellState 1.0 ShellState.qml

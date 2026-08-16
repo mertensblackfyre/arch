@@ -1,25 +1,29 @@
 import Quickshell
 import "modules/bar"
 import "modules/popup"
-import "modules/wifi"
-import "services" as Services
 import "config" as Config
+import "widgets"
 import QtQuick
 
 ShellRoot {
+    PanelWindow {
+        anchors {
+            left: true
+            bottom: true
+            right: true
+            top: true
+        }
+        color: "transparent"
+        exclusiveZone: -1
+        mask: Region {}
+
+        Border {}
+    }
     Bar {
-        id:bar
-
+        id: bar
     }
 
-
-    Popup{
-        id:pop
+    Popup {
+        id: pop
     }
-
-    Component.onCompleted: {
-        Qt.callLater(() => console.log(Config.Theme.background))
-    }
-
-
 }

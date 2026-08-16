@@ -19,8 +19,9 @@ PanelWindow {
         id: barBackground
         width: parent.width
         height: parent.height
-
-        color: "transparent"
+        topLeftRadius: Config.Appearance.rounding.large
+        bottomLeftRadius: Config.Appearance.rounding.large
+        color: Config.Theme.background
 
         ColumnLayout {
             anchors.fill: parent
@@ -28,7 +29,6 @@ PanelWindow {
 
             Widgets.Pill {
                 Layout.alignment: Qt.AlignHCenter
-                color: Config.Theme.surfaceContainer
                 topRightRadius: Config.Appearance.rounding.normal
                 bottomRightRadius: Config.Appearance.rounding.normal
                 Workspaces {}
@@ -40,7 +40,6 @@ PanelWindow {
 
             Widgets.Pill {
                 Layout.alignment: Qt.AlignHCenter
-                color: Config.Theme.surfaceContainer
 
                 topRightRadius: Config.Appearance.rounding.normal
                 bottomRightRadius: Config.Appearance.rounding.normal
@@ -53,10 +52,11 @@ PanelWindow {
 
             Widgets.Pill {
                 implicitHeight: _height - Config.Appearance.padding.normal
-                color: Config.Theme.background
+                color: "transparent"
+                //color: Config.Theme.background
                 topRightRadius: Config.Appearance.rounding.normal
                 bottomRightRadius: Config.Appearance.rounding.normal
-                contentSpacing:5
+                contentSpacing: 5
                 Widgets.Pill {
                     hoverAllowed: true
                     cornerRadius: Config.Appearance.rounding.normal
@@ -67,10 +67,9 @@ PanelWindow {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                         Services.ShellState._show("wifi",620, 220)
+                            Services.ShellState._show("wifi", 620, 220);
                         }
                     }
-
                 }
 
                 Widgets.Pill {
@@ -80,9 +79,6 @@ PanelWindow {
                     Clock {}
                 }
             }
-
-
         }
     }
-
 }

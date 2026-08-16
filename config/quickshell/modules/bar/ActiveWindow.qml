@@ -9,7 +9,6 @@ import "../../services" as Services
 Item {
     id: root
 
-    property color colour: Config.Theme.primary
     property Title current: text1
 
     property var activeToplevel: {
@@ -42,7 +41,6 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         animate: true
         text: Services.Icons.getAppCategoryIcon(Services.Hyprland.activeToplevel?.lastIpcObject.class, "desktop_windows")
-        color: root.colour
     }
 
     TextMetrics {
@@ -74,7 +72,6 @@ Item {
         anchors.horizontalCenter: icon.horizontalCenter
         anchors.top: icon.bottom
         anchors.topMargin: Config.Appearance.spacing.small
-        color: root.colour
         font.pointSize: metrics.font.pointSize
         font.family: metrics.font.family
         font.bold: true

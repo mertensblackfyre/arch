@@ -19,5 +19,4 @@ Widgets.StyledText {
     font.bold: true
     horizontalAlignment: Text.AlignHCenter
     rotation: 0
-    color: Config.Theme.primary
 }

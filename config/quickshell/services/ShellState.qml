@@ -9,17 +9,17 @@ Singleton {
     property string active: ""
 
     function _show(name, w, h) {
-        active = name
-        panelWidth = w
-        panelHeight = h
-        visible = true
-        console.log(w,h, name)
+        active = name;
+        panelWidth = w;
+        panelHeight = h;
+        visible = true;
+        console.log(w, h, name);
     }
 
     function _hide() {
-        visible = false
-        active= ""
-        panelWidth = 0
-        panelHeight = 0
+        visible = false;
+        active = "";
+        panelWidth = 0;
+        panelHeight = 0;
     }
 }

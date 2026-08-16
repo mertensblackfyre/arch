@@ -4,6 +4,7 @@ StyledText {
     property real fill
 
     font.family: Config.Appearance.font.family.material
+    color:Config.Theme.inverseOnSurface
     font.pointSize: Config.Appearance.font.size.larger
     font.variableAxes: ({
             FILL: fill.toFixed(1),

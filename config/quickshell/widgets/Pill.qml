@@ -27,9 +27,9 @@ Rectangle {
 
     color: {
         if (!hoverAllowed)
-            return Config.Theme.surfaceContainer;
+            return Config.Theme.backgroundOn;
 
-        return hoverHandler.hovered ? Config.Theme.primaryOn : Config.Theme.surfaceContainer;
+        return hoverHandler.hovered ? Config.Theme.primaryOn : Config.Theme.backgroundOn;
     }
 
     Behavior on color {
