@@ -6,17 +6,41 @@ import Quickshell.Io
 Item {
     id: root
 
-    property color primary: "#ffb3b1"
-    property color primaryOn: "#571d1e"
-    property color secondary: "#e6bdbb"
-    property color secondaryOn: "#442928"
-    property color surface: "#1a1111"
-    property color surfaceOn: "#f0dedd"
-    property color surfaceContainer: "#271d1d"
-    property color surfaceContainerHigh: "#322827"
-    property color background: "#1a1111"
-    property color backgroundOn: "#f0dedd"
-    property color error: "#ffb4ab"
+    property color background:              "#191113"
+    property color backgroundOn:            "#efdfe1"
+    property color error:                   "#ffb4ab"
+    property color errorContainer:          "#93000a"
+    property color inverseOnSurface:        "#372e30"
+    property color inversePrimary:          "#8b4a61"
+    property color inverseSurface:          "#efdfe1"
+    property color errorOn:                 "#690005"
+    property color errorContainerOn:        "#ffdad6"
+    property color primaryOn:              "#541d33"
+    property color primaryContainer:        "#6f3349"
+    property color primaryContainerOn:     "#ffd9e3"
+    property color secondaryOn:            "#422931"
+    property color secondaryContainerOn:   "#ffd9e3"
+    property color surface:                 "#191113"
+    property color surfaceOn:              "#efdfe1"
+    property color surfaceVariantOn:       "#d5c2c6"
+    property color tertiaryOn:             "#48290c"
+    property color tertiaryContainerOn:    "#ffdcc2"
+    property color outline:                 "#9e8c90"
+    property color outlineVariant:          "#514347"
+    property color primary:                 "#ffb0c9"
+    property color primaryFixed:            "#ffd9e3"
+    property color secondary:               "#e2bdc7"
+    property color secondaryContainer:      "#5a3f48"
+    property color surfaceBright:           "#403739"
+    property color surfaceContainer:        "#261d20"
+    property color surfaceContainerHigh:    "#31282a"
+    property color surfaceContainerHighest: "#3c3235"
+    property color surfaceContainerLow:     "#22191c"
+    property color surfaceContainerLowest:  "#140c0e"
+    property color surfaceDim:              "#191113"
+    property color surfaceVariant:          "#514347"
+    property color tertiary:                "#efbc94"
+    property color tertiaryContainer:       "#623f20"
 
     FileView {
         id: colorFile
@@ -29,16 +53,41 @@ Item {
     readonly property var _parsed: JSON.parse(colorFile.text())
 
     Component.onCompleted: {
-        root.primary = _parsed.colors.primary;
-        root.primaryOn = _parsed.colors.on_primary;
-        root.secondary = _parsed.colors.secondary;
-        root.secondaryOn = _parsed.colors.on_secondary;
-        root.surface = _parsed.colors.surface;
-        root.surfaceOn = _parsed.colors.on_surface;
-        root.surfaceContainer = _parsed.colors.surface_container;
-        root.surfaceContainerHigh = _parsed.colors.surface_container_high;
-        root.background = _parsed.colors.background;
-        root.backgroundOn = _parsed.colors.on_background;
-        root.error = _parsed.colors.error;
+        const c = _parsed.colors
+        root.background              = c.background
+        root.backgroundOn            = c.on_background
+        root.error                   = c.error
+        root.errorContainer          = c.error_container
+        root.inverseOnSurface        = c.inverse_on_surface
+        root.inversePrimary          = c.inverse_primary
+        root.inverseSurface          = c.inverse_surface
+        root.errorOn                 = c.on_error
+        root.errorContainerOn        = c.on_error_container
+        root.primaryOn               = c.on_primary
+        root.primaryContainer        = c.primary_container
+        root.primaryContainerOn      = c.on_primary_container
+        root.secondaryOn             = c.on_secondary
+        root.secondaryContainerOn    = c.on_secondary_container
+        root.surface                 = c.surface
+        root.surfaceOn               = c.on_surface
+        root.surfaceVariantOn        = c.on_surface_variant
+        root.tertiaryOn              = c.on_tertiary
+        root.tertiaryContainerOn     = c.on_tertiary_container
+        root.outline                 = c.outline
+        root.outlineVariant          = c.outline_variant
+        root.primary                 = c.primary
+        root.primaryFixed            = c.primary_fixed
+        root.secondary               = c.secondary
+        root.secondaryContainer      = c.secondary_container
+        root.surfaceBright           = c.surface_bright
+        root.surfaceContainer        = c.surface_container
+        root.surfaceContainerHigh    = c.surface_container_high
+        root.surfaceContainerHighest = c.surface_container_highest
+        root.surfaceContainerLow     = c.surface_container_low
+        root.surfaceContainerLowest  = c.surface_container_lowest
+        root.surfaceDim              = c.surface_dim
+        root.surfaceVariant          = c.surface_variant
+        root.tertiary                = c.tertiary
+        root.tertiaryContainer       = c.tertiary_container
     }
 }

@@ -16,7 +16,6 @@ Item {
     implicitWidth: icon.implicitWidth
     implicitHeight: icon.implicitHeight
 
-    Wifi.WifiPanel { id: wifiPanel }
 
     Widgets.MaterialIcon {
         id: icon

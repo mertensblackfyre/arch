@@ -1,17 +1,25 @@
-// services/ShellState.qml
 pragma Singleton
 import Quickshell
+import QtQuick
 
 Singleton {
-    id: root
+    property bool visible: false
+    property real panelWidth: 0
+    property real panelHeight: 0
+    property string active: ""
 
-    property string activePopup: ""
-
-    function toggle(name) {
-        activePopup = activePopup === name ? "" : name
+    function _show(name, w, h) {
+        active = name
+        panelWidth = w
+        panelHeight = h
+        visible = true
+        console.log(w,h, name)
     }
 
-    function close() {
-        activePopup = ""
+    function _hide() {
+        visible = false
+        active= ""
+        panelWidth = 0
+        panelHeight = 0
     }
 }

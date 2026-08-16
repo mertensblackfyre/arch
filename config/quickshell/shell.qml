@@ -1,15 +1,21 @@
 import Quickshell
 import "modules/bar"
 import "modules/popup"
+import "modules/wifi"
+import "services" as Services
 import QtQuick
 
 ShellRoot {
     Bar {
         id:bar
+
     }
- //   PopupLayer {
-   //     id: popupLayer
-   //}
+
+
+    Popup{
+        id:pop
+    }
+
 
 
 }

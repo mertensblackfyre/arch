@@ -1,75 +1,37 @@
 // modules/popup/PopupLayer.qml
-import Quickshell
 import QtQuick
 import "../../widgets" as Widgets
 import "../../config" as Config
 
-PanelWindow {
-    id: root
 
-     property bool open: false
-     property Component contentComponent: null
-     property int panelWidth: 264
-     property int panelMargins: 8
-     property int windowWidth: 280
-     property bool closeOnOutsideClick: true
-     signal outsideClicked()
+Item {
+  id: root
+  property bool expand: false;
+  required property real expandWidth;
+  required property real expandHeight;
+  property real baseWidth: expandWidth - 100;
+  property real baseHeight: 200;
 
-     anchors.left: true
-     anchors.top: true
-     anchors.bottom: true
-     margins.left: 48
-     exclusiveZone: -1
-     aboveWindows: true
-     color: "red"
+  property alias bottomRightRadius: bg.bottomRightRadius
+  property alias bottomLeftRadius: bg.bottomLeftRadius
+  property alias topRightRadius: bg.topRightRadius
+  property alias topLeftRadius: bg.topLeftRadius
 
-     visible: true
-     implicitWidth: windowWidth
+  implicitHeight: expand ? expandHeight : baseHeight;
+  implicitWidth: expand ? expandWidth : baseWidth;
 
-     MouseArea {
-         anchors.fill: parent
-         onClicked: {
-             if (root.closeOnOutsideClick) {
-                 root.outsideClicked()
-             }
-         }
-     }
+  Rectangle {
+    id: bg
+    anchors.fill: parent
+    color: Config.Theme.background
+  }
 
-      Rectangle {
-          id: panel
-          anchors.top: parent.top
-          anchors.left: parent.left
-          anchors.margins: root.panelMargins
-          width: root.panelWidth
-          height: content.implicitHeight + 24
-          radius: 16
-          color: Config.Theme.background
+  Behavior on implicitHeight {
+      Widgets.Anim{}
+  }
 
-          // Prevent outside‑click closing when clicking inside the panel
-          MouseArea {
-              anchors.fill: parent
-              onClicked: {}
-          }
-
-          Loader {
-              id: content
-              anchors.fill: parent
-              anchors.margins: 12
-              sourceComponent: root.contentComponent
-          }
-
-          Behavior on width {
-              Widgets.Anim { duration: Config.Appearance.anim.durations.small }
-          }
-          Behavior on height {
-              Widgets.Anim { duration: Config.Appearance.anim.durations.small }
-          }
-      }
-
-
-
-      Behavior on implicitWidth {
-             Widgets.Anim {}
-         }
+  Behavior on implicitWidth {
+   Widgets.Anim{}
+  }
 
 }

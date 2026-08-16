@@ -1,4 +1,3 @@
 module modules.wifi
 
-WifiPanel 1.0 WifiPanel.qml
 NetworkList 1.0 NetworkList.qml

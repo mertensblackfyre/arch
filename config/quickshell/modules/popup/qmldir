@@ -1,4 +1,4 @@
 module modules.popup
 
 PopupLayer 1.0 PopupLayer.qml
-PopupSlide 1.0 PopupSlide.qml
+Popup 1.0 Popup.qml

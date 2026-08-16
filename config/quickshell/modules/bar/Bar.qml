@@ -13,7 +13,6 @@ PanelWindow {
     anchors.left: true
     anchors.bottom: true
     implicitWidth: 35
-      property bool showPopup: false
     color: "transparent"
 
     Rectangle {
@@ -64,9 +63,16 @@ PanelWindow {
 
                     Battery {}
                     Wifi {}
-                    Battery {}
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                         Services.ShellState._show("wifi",620, 220)
+                        }
+                    }
 
                 }
+
                 Widgets.Pill {
                     hoverAllowed: true
                     implicitWidth: root.width - 8
@@ -78,4 +84,5 @@ PanelWindow {
 
         }
     }
+
 }
