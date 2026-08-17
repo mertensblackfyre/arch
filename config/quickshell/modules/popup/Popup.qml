@@ -2,12 +2,17 @@ import Quickshell
 import QtQuick
 import "../wifi"
 import "../../services" as Services
+import "../../widgets" as Widgets
+import "../../config" as Config
 
 PanelWindow {
     id: win
-    anchors.left: true
-    anchors.bottom: true
-    anchors.top: true
+    anchors {
+        left: true
+        bottom: true
+        right: true
+        top: true
+    }
     exclusiveZone: -1
     aboveWindows: true
     color: "transparent"
@@ -24,20 +29,51 @@ PanelWindow {
     }
 
     PopupLayer {
+        id: root
         anchors.bottom: parent.bottom
         anchors.left: parent.left
-        baseWidth: 300
-        baseHeight: 100
+        anchors.bottomMargin: 8
+        baseWidth: 0
+        baseHeight: 20
         expandHeight: Services.ShellState.panelHeight
         expandWidth: Services.ShellState.panelWidth
         expand: Services.ShellState.visible
-        radius: 16
+
+        topRightRadius: Config.Appearance.rounding.normal
+
+        Behavior on implicitHeight {
+            SpringAnimation {
+                spring: 3
+                damping: 0.3
+            }
+        }
+        Behavior on implicitWidth {
+            SpringAnimation {
+                spring: 3
+                damping: 0.3
+            }
+        }
 
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-            onEntered: hideTimer.stop()
-            onExited: hideTimer.start()
+            onExited: Services.ShellState._hide()
+        }
+
+        Widgets.Corners {
+            flip: true
+            flipH: true
+            anchors.bottom: parent.top
+            anchors.left: parent.left
+        }
+
+        Widgets.Corners {
+
+            anchors.left: parent.right
+
+            anchors.bottom: parent.bottom
+            flip: true
+            flipH: true
         }
 
         Loader {

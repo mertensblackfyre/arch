@@ -40,6 +40,7 @@ PanelWindow {
 
             Widgets.Pill {
                 Layout.alignment: Qt.AlignHCenter
+                color: "transparent"
 
                 topRightRadius: Config.Appearance.rounding.normal
                 bottomRightRadius: Config.Appearance.rounding.normal

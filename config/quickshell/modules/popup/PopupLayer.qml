@@ -9,12 +9,15 @@ Item {
     required property real expandHeight
     property real baseWidth: expandWidth - 100
     property real baseHeight: 200
-
     property alias radius: bg.radius
+
+    property alias bottomRightRadius: bg.bottomRightRadius
+    property alias bottomLeftRadius: bg.bottomLeftRadius
+    property alias topRightRadius: bg.topRightRadius
+    property alias topLeftRadius: bg.topLeftRadius
 
     width: implicitWidth
     height: implicitHeight
-
     implicitHeight: expand ? expandHeight : baseHeight
     implicitWidth: expand ? expandWidth : baseWidth
 
@@ -27,7 +30,6 @@ Item {
     Behavior on implicitHeight {
         Widgets.Anim {}
     }
-
     Behavior on implicitWidth {
         Widgets.Anim {}
     }

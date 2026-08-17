@@ -37,8 +37,8 @@ QtObject {
     }
 
     component FontFamily: JsonObject {
-        property string sans: "SF Pro Display"
-        property string mono: "JetBrainsMono Nerd Font"
+        property string sans: "Google Sans Flex Medium"
+        property string mono: "Noto Sans Mono"
         property string material: "Material Symbols Rounded"
         property string clock: "Rubik"
     }

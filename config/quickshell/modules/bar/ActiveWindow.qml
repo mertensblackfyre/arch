@@ -40,6 +40,8 @@ Item {
         id: icon
         anchors.horizontalCenter: parent.horizontalCenter
         animate: true
+
+        color:Config.Theme.backgroundOn
         text: Services.Icons.getAppCategoryIcon(Services.Hyprland.activeToplevel?.lastIpcObject.class, "desktop_windows")
     }
 
@@ -71,8 +73,9 @@ Item {
         id: text
         anchors.horizontalCenter: icon.horizontalCenter
         anchors.top: icon.bottom
+        color:Config.Theme.backgroundOn
         anchors.topMargin: Config.Appearance.spacing.small
-        font.pointSize: metrics.font.pointSize
+        font.pointSize: metrics.font.pointSize - 1
         font.family: metrics.font.family
         font.bold: true
         opacity: root.current === this ? 1 : 0
