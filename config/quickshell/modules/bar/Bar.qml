@@ -67,7 +67,7 @@ PanelWindow {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            Services.ShellState._show("wifi", 620, 220);
+                            Services.ShellState._show("wifi", 420, 220);
                         }
                     }
                 }

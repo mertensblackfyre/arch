@@ -1,4 +1,3 @@
-// modules/popup/PopupLayer.qml
 import QtQuick
 import "../../widgets" as Widgets
 import "../../config" as Config
@@ -11,10 +10,10 @@ Item {
     property real baseWidth: expandWidth - 100
     property real baseHeight: 200
 
-    property alias bottomRightRadius: bg.bottomRightRadius
-    property alias bottomLeftRadius: bg.bottomLeftRadius
-    property alias topRightRadius: bg.topRightRadius
-    property alias topLeftRadius: bg.topLeftRadius
+    property alias radius: bg.radius
+
+    width: implicitWidth
+    height: implicitHeight
 
     implicitHeight: expand ? expandHeight : baseHeight
     implicitWidth: expand ? expandWidth : baseWidth

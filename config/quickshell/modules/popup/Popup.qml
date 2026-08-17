@@ -1,4 +1,3 @@
-// modules/popup/Popup.qml
 import Quickshell
 import QtQuick
 import "../wifi"
@@ -13,25 +12,32 @@ PanelWindow {
     aboveWindows: true
     color: "transparent"
     implicitWidth: Services.ShellState.panelWidth + 50
-    visible: Services.ShellState.visible
+
+    visible: Services.ShellState.visible || hideTimer.running
     margins.left: 35
+
+    Timer {
+        id: hideTimer
+        interval: 200
+        repeat: false
+        onTriggered: Services.ShellState._hide()
+    }
 
     PopupLayer {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
-        //anchors.leftMargin: 35
-        // anchors.bottomMargin: 10
         baseWidth: 300
         baseHeight: 100
         expandHeight: Services.ShellState.panelHeight
         expandWidth: Services.ShellState.panelWidth
         expand: Services.ShellState.visible
-        topRightRadius: 30
+        radius: 16
 
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-            onExited: Services.ShellState._hide()
+            onEntered: hideTimer.stop()
+            onExited: hideTimer.start()
         }
 
         Loader {
