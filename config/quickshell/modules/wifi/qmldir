@@ -1,0 +1,3 @@
+module modules.wifi
+
+NetworkList 1.0 NetworkList.qml

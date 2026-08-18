@@ -1,0 +1,9 @@
+module widgets
+
+StyledText 1.0 StyledText.qml
+Pill 1.0 Pill.qml
+Anim 1.0 Anim.qml
+ColorAnim 1.0 ColorAnim.qml
+Border 1.0 Border.qml
+MaterialIcon 1.0 MaterialIcon.qml
+Corners 1.0 Corners.qml

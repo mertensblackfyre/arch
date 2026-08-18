@@ -1,0 +1,3 @@
+module quickshell
+
+singleton Hyprland 1.0 services/Hyprland.qml
