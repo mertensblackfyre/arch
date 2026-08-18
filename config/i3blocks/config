@@ -1,4 +1,0 @@
-[network]
-command=/usr/bin/ip -4 addr show
-interval=10
-

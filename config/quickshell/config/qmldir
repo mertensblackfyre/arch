@@ -1,3 +1,0 @@
-module config
-singleton Appearance 1.0 Appearance.qml
-singleton Theme 1.0 Theme.qml
