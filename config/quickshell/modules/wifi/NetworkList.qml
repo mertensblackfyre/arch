@@ -25,12 +25,28 @@ Item {
             width: parent.width
             height: parent.height
 
-            Component.NetworkRow {
-                width: parent.width - 15
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.topMargin: 8
-                anchors.leftMargin: 8
+            Flickable {
+                id: flick
+                anchors.fill: parent
+                contentWidth: width
+                contentHeight: networkColumn.implicitHeight
+                clip: true
+                boundsBehavior: Flickable.StopAtBounds
+                interactive: true
+
+                Column {
+                    id: networkColumn
+                    width: flick.width
+                    spacing: 8
+
+                    Repeater {
+                        model: Services.Network.networks
+                        delegate: Component.NetworkRow {
+
+                            networkColumn: networkColumn
+                        }
+                    }
+                }
             }
         }
 
@@ -38,7 +54,7 @@ Item {
             width: parent.width
             height: 160
             visible: Services.Network.scanning && Services.Network.networks.lenght === 0
-            Component.ScanRings {
+            Component.NetworkScanRings {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     top: parent.top

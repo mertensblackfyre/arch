@@ -8,6 +8,7 @@ Item {
     width: parent.width
     height: 40
 
+    property int horizontalPadding: 12
     Widgets.StyledText {
         anchors {
             left: parent.left

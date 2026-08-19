@@ -104,8 +104,6 @@ Singleton {
             id: connectStderr
         }
         onExited: function (code, status) {
-            console.log("stdout:", connectStdout.text);
-            console.log("stderr:", connectStderr.text);
             if (code === 0) {
                 var np = Object.assign({}, root.needsPassword);
                 delete np[connectProc._ssid];

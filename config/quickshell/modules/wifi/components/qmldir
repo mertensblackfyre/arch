@@ -1,6 +1,8 @@
 module modules.wifi.components
 
 
-ScanRings 1.0 ScanRings.qml
+NetworkScanRings 1.0 NetworkScanRings.qml
 NetworkRow 1.0 NetworkRow.qml
 NetworkHeader 1.0 NetworkHeader.qml
+NetworkBaseRow 1.0 NetworkBaseRow.qml
+NetworkExpandArea 1.0 NetworkExpandArea.qml
