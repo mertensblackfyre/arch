@@ -19,8 +19,8 @@ Item {
         left: parent.left
         right: parent.right
     }
+    
     height: 48
-
     required property var modelData
 
     Row {

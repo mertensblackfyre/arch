@@ -7,8 +7,8 @@ import "../../../services" as Services
 Item {
     width: parent.width
     height: 40
+    anchors.margins:Config.Appearance.padding.normal
 
-    property int horizontalPadding: 12
     Widgets.StyledText {
         anchors {
             left: parent.left
@@ -51,9 +51,7 @@ Item {
                 font.pixelSize: 14
                 color: Services.Network.wifiEnabled ? (wfPwrH.hovered ? Config.Theme.error : Qt.rgba(1, 1, 1, 0.32)) : Config.Theme.primary
                 Behavior on color {
-                    ColorAnimation {
-                        duration: 120
-                    }
+                    Widgets.ColorAnim{}
                 }
             }
             HoverHandler {
@@ -75,9 +73,8 @@ Item {
             border.color: Qt.rgba(1, 1, 1, 0.10)
             border.width: 1
             Behavior on color {
-                ColorAnimation {
-                    duration: 100
-                }
+
+                Widgets.ColorAnim{}
             }
             Widgets.MaterialIcon {
                 anchors.centerIn: parent
@@ -85,9 +82,7 @@ Item {
                 font.pixelSize: 14
                 color: settH.hovered ? Qt.rgba(1, 1, 1, 0.75) : Qt.rgba(1, 1, 1, 0.30)
                 Behavior on color {
-                    ColorAnimation {
-                        duration: 100
-                    }
+                    Widgets.ColorAnim{}
                 }
             }
             HoverHandler {
@@ -109,9 +104,8 @@ Item {
             border.color: Qt.rgba(Config.Theme.primary.r, Config.Theme.primary.g, Config.Theme.primary.b, 0.28)
             border.width: 1
             Behavior on color {
-                ColorAnimation {
-                    duration: 120
-                }
+
+                Widgets.ColorAnim{}
             }
             Widgets.MaterialIcon {
                 id: rfIcon
@@ -120,9 +114,8 @@ Item {
                 font.pixelSize: 15
                 color: Services.Network.scanning ? Qt.rgba(Config.Theme.primary.r, Config.Theme.primary.g, Config.Theme.primary.b, 0.4) : Services.Network.wifiEnabled ? Config.Theme.primary : Qt.rgba(1, 1, 1, 0.18)
                 Behavior on color {
-                    ColorAnimation {
-                        duration: 150
-                    }
+
+                    Widgets.ColorAnim{}
                 }
                 RotationAnimator {
                     target: rfIcon

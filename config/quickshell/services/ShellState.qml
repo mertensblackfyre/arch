@@ -26,7 +26,6 @@ Singleton {
         panelWidth = w;
         panelHeight = h;
         visible = true;
-        console.log(w, h, name);
     }
 
     function _hide() {

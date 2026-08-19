@@ -23,8 +23,8 @@ QtObject {
         property int small: 7 * scale
         property int smaller: 10 * scale
         property int normal: 12 * scale
-        property int larger: 15 * scale
-        property int large: 20 * scale
+        property int large: 15 * scale
+        property int larger: 20 * scale
     }
 
     component Padding: JsonObject {
@@ -32,8 +32,8 @@ QtObject {
         property int small: 5 * scale
         property int smaller: 7 * scale
         property int normal: 10 * scale
-        property int larger: 12 * scale
-        property int large: 15 * scale
+        property int large: 12 * scale
+        property int larger: 15 * scale
     }
 
     component FontFamily: JsonObject {
@@ -48,8 +48,8 @@ QtObject {
         property int small: 11 * scale
         property int smaller: 12 * scale
         property int normal: 13 * scale
-        property int larger: 15 * scale
-        property int large: 18 * scale
+        property int large: 15 * scale
+        property int larger: 18 * scale
         property int extraLarge: 28 * scale
     }
 

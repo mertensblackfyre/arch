@@ -11,8 +11,7 @@ Item {
 
     Column {
         anchors.fill: parent
-        spacing: 0
-
+        spacing: Config.Appearance.spacing.normal
         Component.NetworkHeader {}
 
         Rectangle {
@@ -22,8 +21,9 @@ Item {
         }
 
         Item {
-            width: parent.width
+            width: parent.width - 10
             height: parent.height
+            anchors.topMargin: Config.Appearance.padding.small
 
             Flickable {
                 id: flick
@@ -42,7 +42,6 @@ Item {
                     Repeater {
                         model: Services.Network.networks
                         delegate: Component.NetworkRow {
-
                             networkColumn: networkColumn
                         }
                     }
