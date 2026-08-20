@@ -1,0 +1,6 @@
+
+
+
+module modules.bluetooth
+
+BluetoothList 1.0 BluetoothList.qml

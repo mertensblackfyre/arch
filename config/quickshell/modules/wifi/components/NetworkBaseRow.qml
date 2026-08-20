@@ -19,7 +19,7 @@ Item {
         left: parent.left
         right: parent.right
     }
-    
+
     height: 48
     required property var modelData
 
@@ -150,8 +150,8 @@ Item {
                 anchors.fill: parent
                 onClicked: {
                     root.isForgetPending = false;
-                    if (root.isExpanded && passInput.text !== "") {
-                        Services.Network.connectWithPassword(root.modelData.ssid, passInput.text);
+                    if (root.isExpanded && root.passInput.text !== "") {
+                        Services.Network.connectWithPassword(root.modelData.ssid, root.passInput.text);
                     } else {
                         Services.Network.connectFirst(root.modelData.ssid);
                     }

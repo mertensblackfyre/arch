@@ -38,6 +38,8 @@ Item {
         iconColor: root.isBluetoothOn ? Config.Theme.primaryOn : Config.Theme.backgroundOn
         iconFallbackColor: iconColor
 
-        onClicked: {}
+        onClicked: {
+            Services.ShellState._show("bt", 450, 520);
+        }
     }
 }

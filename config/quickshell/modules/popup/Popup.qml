@@ -1,6 +1,7 @@
 import Quickshell
 import QtQuick
 import "../wifi"
+import "../bluetooth"
 import "../../services" as Services
 import "../../widgets" as Widgets
 import "../../config" as Config
@@ -94,6 +95,8 @@ PanelWindow {
                 switch (Services.ShellState.active) {
                 case "wifi":
                     return wifiComponent;
+                case "bt":
+                    return bluetoothComponent
                 default:
                     return null;
                 }
@@ -104,5 +107,9 @@ PanelWindow {
             id: wifiComponent
             NetworkList {}
         }
+        Component {
+                   id: bluetoothComponent
+                  BluetoothList{}
+               }
     }
 }

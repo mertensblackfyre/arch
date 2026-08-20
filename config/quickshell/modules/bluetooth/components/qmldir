@@ -1,0 +1,7 @@
+module modules.bluetooth.components
+
+
+BluetoothHeader 1.0 BluetoothHeader.qml
+BluetoothBaseRow 1.0 BluetoothBaseRow.qml
+BluetoothExpandArea 1.0 BluetoothExpandArea.qml
+BluetoothScanRings 1.0 BluetoothScanRings.qml

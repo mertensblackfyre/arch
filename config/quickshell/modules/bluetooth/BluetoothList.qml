@@ -1,4 +1,4 @@
-// modules/wifi/NetworkList.qml
+// modules/bluetooth/BluetoothList.qml
 pragma ComponentBehavior: Bound
 import QtQuick
 import "../../config" as Config
@@ -9,15 +9,15 @@ Item {
     id: root
     anchors.fill: parent
 
-    property var connectedNetworks: Services.Network.networks.filter(n => n.inUse)
-    property var availableNetworks: Services.Network.networks.filter(n => !n.inUse)
+    property var pairedDevices:    Services.Bluetooth.allDevices.filter(d => d.paired)
+    property var availableDevices: Services.Bluetooth.allDevices.filter(d => !d.paired)
 
     Column {
         anchors.fill: parent
         anchors.margins: Config.Appearance.spacing.larger
         spacing: Config.Appearance.spacing.normal
 
-        Components.NetworkHeader {}
+        Components.BluetoothHeader {}
 
         Rectangle {
             width: parent.width
@@ -33,21 +33,22 @@ Item {
                 id: flick
                 anchors.fill: parent
                 contentWidth: width
-                contentHeight: networkColumn.implicitHeight
+                contentHeight: deviceColumn.implicitHeight
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
 
                 Column {
-                    id: networkColumn
+                    id: deviceColumn
                     width: flick.width
                     spacing: 8
 
+                    // scanning indicator
                     Item {
                         width: parent.width
                         height: 160
-                        visible: Services.Network.scanning && Services.Network.networks.length === 0
+                        visible: Services.Bluetooth.scanning && Services.Bluetooth.allDevices.length === 0
 
-                        Components.NetworkScanRings {
+                        Components.BluetoothScanRings {
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.top: parent.top
                             anchors.topMargin: 12
@@ -61,17 +62,18 @@ Item {
                             anchors.bottomMargin: 8
                             text: "Scanning…"
                             font.pixelSize: 11
-                            color: Qt.rgba(Config.Theme.primary.r, Config.Theme.primary.g, Config.Theme.primary.b, 0.5)
+                            color: Qt.rgba(Config.Theme.tertiary.r, Config.Theme.tertiary.g, Config.Theme.tertiary.b, 0.5)
                         }
                     }
 
+                    // paired section
                     Column {
                         width: parent.width
                         spacing: Config.Appearance.spacing.small
-                        visible: root.connectedNetworks.length > 0
+                        visible: root.pairedDevices.length > 0
 
                         Text {
-                            text: "CONNECTED"
+                            text: "PAIRED"
                             font.pixelSize: 9
                             font.bold: true
                             font.letterSpacing: 1.2
@@ -79,17 +81,29 @@ Item {
                         }
 
                         Repeater {
-                            model: root.connectedNetworks
-                            delegate: Components.NetworkRow {
-                                networkColumn: networkColumn
+                            model: root.pairedDevices
+                            delegate: Components.BluetoothBaseRow {
+                                required property var modelData
+                                width: deviceColumn.width
+                                device: modelData
+                                isPaired: true
                             }
                         }
                     }
 
+                    // divider
+                    Rectangle {
+                        width: parent.width
+                        height: 1
+                        color: Qt.rgba(1, 1, 1, 0.07)
+                        visible: root.pairedDevices.length > 0 && root.availableDevices.length > 0
+                    }
+
+                    // available section
                     Column {
                         width: parent.width
                         spacing: Config.Appearance.spacing.small
-                        visible: root.availableNetworks.length > 0
+                        visible: root.availableDevices.length > 0
 
                         Text {
                             text: "AVAILABLE"
@@ -100,40 +114,41 @@ Item {
                         }
 
                         Repeater {
-                            model: root.availableNetworks
-                            delegate: Components.NetworkRow {
-                                networkColumn: networkColumn
+                            model: root.availableDevices
+                            delegate: Components.BluetoothBaseRow {
+                                required property var modelData
+                                width: deviceColumn.width
+                                device: modelData
+                                isPaired: false
                             }
                         }
                     }
 
+                    // no devices found
                     Item {
                         width: parent.width
                         height: 160
-                        visible: !Services.Network.scanning && Services.Network.networks.length === 0
+                        visible: !Services.Bluetooth.scanning && Services.Bluetooth.allDevices.length === 0
 
                         Column {
                             anchors.centerIn: parent
                             spacing: 10
                             Text {
                                 anchors.horizontalCenter: parent.horizontalCenter
-                                text: "󰤭"
+                                text: "󰂲"
                                 font.pixelSize: 34
                                 color: Qt.rgba(1, 1, 1, 0.08)
                             }
                             Text {
                                 anchors.horizontalCenter: parent.horizontalCenter
-                                text: "No networks found"
+                                text: "No devices found"
                                 font.pixelSize: 12
                                 color: Qt.rgba(1, 1, 1, 0.2)
                             }
                         }
                     }
 
-                    Item {
-                        width: parent.width
-                        height: 8
-                    }
+                    Item { width: parent.width; height: 8 }
                 }
             }
         }
