@@ -1,9 +1,10 @@
-// modules/bar/Wifi.qml
 import QtQuick
+import QtQuick.Layouts
 import Quickshell.Networking
 import "../../widgets" as Widgets
 import "../../services" as Services
 import "../wifi" as Wifi
+import "../../config" as Config
 
 Item {
     id: root
@@ -14,19 +15,27 @@ Item {
     property bool secured: wifi?.activeAccessPoint?.secured ?? false
     property bool connected: wifiDevice?.connected ?? false
 
-    implicitWidth: icon.implicitWidth
-    implicitHeight: icon.implicitHeight
+    width: icon.width - Config.Appearance.padding.large
+    height: icon.height - Config.Appearance.padding.large
 
-    Widgets.MaterialIcon {
+    Layout.alignment: Qt.AlignHCenter
+
+    Widgets.IconButton {
         id: icon
-        text: Services.Icons.getNetworkIcon(root.strength, root.secured)
-        //color: root.connected ? "white" : "gray"
-    }
+        anchors.centerIn: parent
 
-    MouseArea {
-        anchors.fill: parent
+        iconText: Services.Icons.getNetworkIcon(root.strength, root.secured)
+        pixelSize: Config.Appearance.font.size.extraLarge - 8
+        customRadius: Config.Appearance.rounding.normal
+
+        rectColor: root.connected ? Config.Theme.surfaceLayer(Config.Theme.primary, 1) : Config.Theme.surfaceLayer(Config.Theme.background, 0)
+        rectFallbackColor: rectColor
+
+        iconColor: root.connected ? Config.Theme.primaryOn : Config.Theme.backgroundOn
+        iconFallbackColor: iconColor
+
         onClicked: {
-            Services.ShellState._show("wifi", 400, 420);
+            Services.ShellState._show("wifi", 450, 520);
         }
     }
 }

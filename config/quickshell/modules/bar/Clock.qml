@@ -16,8 +16,9 @@ Widgets.StyledText {
 
     text: Qt.formatTime(root.now, "hh\nmm")
     color:Config.Theme.backgroundOn
-    font.pointSize: Config.Appearance.font.size.smaller - 1
+    font.pointSize: Config.Appearance.font.size.normal - 2
     font.bold: true
+    verticalAlignment:Text.AlignVCenter
     horizontalAlignment: Text.AlignHCenter
     rotation: 0
 }

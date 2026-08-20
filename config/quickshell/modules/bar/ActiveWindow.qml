@@ -48,7 +48,7 @@ Item {
     TextMetrics {
         id: metrics
         text: root.getTruncatedTitle(20) ?? "Desktop"
-        font.pointSize: Config.Appearance.font.size.smaller
+        font.pixelSize: Config.Appearance.font.size.larger
         font.family: Config.Appearance.font.family.mono
 
         onTextChanged: {
@@ -75,7 +75,7 @@ Item {
         anchors.top: icon.bottom
         color:Config.Theme.backgroundOn
         anchors.topMargin: Config.Appearance.spacing.small
-        font.pointSize: metrics.font.pointSize - 1
+        font.pixelSize: metrics.font.pointSize
         font.family: metrics.font.family
         font.bold: true
         opacity: root.current === this ? 1 : 0

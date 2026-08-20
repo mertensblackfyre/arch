@@ -1,17 +1,20 @@
 import QtQuick
+import "../config" as Config
 
 Rectangle {
     id: root
 
-    // Generic state property (e.g., active, pending, selected)
+    property alias iconItem: iconElement
+
     property bool active: false
 
-    // Color properties (must be type 'color', not 'string')
     property color rectColor: Qt.rgba(1, 1, 1, 0.10)
     property color rectFallbackColor: "transparent"
 
     property color iconColor: Qt.rgba(1, 1, 1, 0.65)
     property color iconFallbackColor: Qt.rgba(1, 1, 1, 0.35)
+
+    property color borderColor: "transparent"
 
     property string iconText: ""
     property int pixelSize: 14
@@ -19,20 +22,20 @@ Rectangle {
 
     signal clicked
 
-    width: 24
-    height: 24
-    radius: customRadius
-    anchors.centerIn: parent // Cleanly centers inside parent wrapper
+    implicitWidth: iconElement.width + Config.Appearance.padding.large
+    implicitHeight: iconElement.height + Config.Appearance.padding.large
 
-    // Evaluates both internal hover and external active state
+    radius: customRadius
+    anchors.centerIn: parent
+    border.color: borderColor
     color: (hover.hovered || root.active) ? rectColor : rectFallbackColor
 
     MaterialIcon {
+        id: iconElement
         anchors.centerIn: parent
         text: root.iconText
         color: (hover.hovered || root.active) ? root.iconColor : root.iconFallbackColor
         font.pixelSize: root.pixelSize
-
         Behavior on color {
             ColorAnim {}
         }
@@ -42,7 +45,6 @@ Rectangle {
         id: hover
         cursorShape: Qt.PointingHandCursor
     }
-
     MouseArea {
         anchors.fill: parent
         onClicked: root.clicked()

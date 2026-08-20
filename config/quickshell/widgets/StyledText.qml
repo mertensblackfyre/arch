@@ -16,7 +16,7 @@ Text {
     textFormat: Text.PlainText
     font.family: Config.Appearance.font.family.sans
 
-    color: Config.Theme.inverseOnSurface
+    color: Config.Theme.on(Config.Theme.primaryOn)
 
     Behavior on color {
         ColorAnim {}

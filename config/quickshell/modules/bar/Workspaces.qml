@@ -24,8 +24,13 @@ Column {
             }
 
             text: toJapanese(modelData.id)
-            color: isActive ? Config.Theme.primary : isHovered ? Config.Theme.secondary : Config.Theme.inverseOnSurface
-            font.pixelSize: 15
+            color: isActive
+                ? Config.Theme.primaryOn
+                : isHovered
+                    ? Config.Theme.primaryOn
+                    : Config.Theme.backgroundOn
+
+                    font.pixelSize: Config.Appearance.font.size.normal
             font.bold: true
 
             Behavior on color {

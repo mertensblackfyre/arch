@@ -5,7 +5,7 @@ StyledText {
 
     font.family: Config.Appearance.font.family.material
     color:Config.Theme.inverseOnSurface
-    font.pointSize: Config.Appearance.font.size.larger
+    font.pixelSize: Config.Appearance.font.size.larger
     font.variableAxes: ({
             FILL: fill.toFixed(1),
             opsz: fontInfo.pixelSize,

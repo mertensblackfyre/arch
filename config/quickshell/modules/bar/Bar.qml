@@ -21,7 +21,7 @@ PanelWindow {
         height: parent.height
         topLeftRadius: Config.Appearance.rounding.large
         bottomLeftRadius: Config.Appearance.rounding.large
-        color: Config.Theme.background
+        color: Config.Theme.surfaceLayer(Config.Theme.background, 0)
 
         ColumnLayout {
             anchors.top: parent.top
@@ -37,7 +37,9 @@ PanelWindow {
                 Workspaces {}
             }
 
-            Item { Layout.fillHeight: true }
+            Item {
+                Layout.fillHeight: true
+            }
         }
 
         Widgets.Pill {
@@ -55,22 +57,25 @@ PanelWindow {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            spacing: 10
+            spacing: Config.Appearance.spacing.smaller
 
-            Item { Layout.fillHeight: true }
-
-            Widgets.Pill {
-                Layout.alignment: Qt.AlignHCenter
-                cornerRadius: Config.Appearance.rounding.normal
-                Wifi {}
-                Battery {}
+            Item {
+                Layout.fillHeight: true
             }
-
             Widgets.Pill {
                 Layout.alignment: Qt.AlignHCenter
                 color: "transparent"
                 cornerRadius: Config.Appearance.rounding.normal
                 Clock {}
+            }
+
+            Widgets.Pill {
+                Layout.alignment: Qt.AlignHCenter
+                Layout.bottomMargin: Config.Appearance.padding.normal
+                cornerRadius: Config.Appearance.rounding.normal
+                Wifi {}
+                Bluetooth {}
+                Battery {}
             }
         }
     }

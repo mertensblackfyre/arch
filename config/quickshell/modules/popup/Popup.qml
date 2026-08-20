@@ -1,4 +1,3 @@
-
 import Quickshell
 import QtQuick
 import "../wifi"
@@ -16,7 +15,7 @@ PanelWindow {
         top: true
     }
     exclusiveZone: -1
-        WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
+    WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
     aboveWindows: true
     color: "transparent"
     implicitWidth: Services.ShellState.panelWidth + 50
@@ -57,7 +56,7 @@ PanelWindow {
                 damping: 0.3
             }
         }
-/*
+        /*
         MouseArea {
             anchors.fill: parent
               onClicked: Services.ShellState._hide()
@@ -66,8 +65,10 @@ PanelWindow {
         HoverHandler {
             id: winHover
             onHoveredChanged: {
-                if (!hovered) hideTimer.start()
-                else hideTimer.stop()
+                if (!hovered)
+                    hideTimer.start();
+                else
+                    hideTimer.stop();
             }
         }
 

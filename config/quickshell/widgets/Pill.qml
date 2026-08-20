@@ -25,12 +25,7 @@ Rectangle {
     implicitWidth: _width
     implicitHeight: _height
 
-    color: {
-        if (!hoverAllowed)
-            return Config.Theme.backgroundOn;
-
-        return hoverHandler.hovered ? Config.Theme.primaryOn : Config.Theme.backgroundOn;
-    }
+    color: Config.Theme.surfaceLayer(Config.Theme.primary,1);
 
     Behavior on color {
         ColorAnimation {}
@@ -39,7 +34,6 @@ Rectangle {
     HoverHandler {
         id: hoverHandler
         acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-        cursorShape: Qt.PointingHandCursor
     }
 
     ColumnLayout {

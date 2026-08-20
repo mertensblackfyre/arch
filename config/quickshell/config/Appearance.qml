@@ -20,8 +20,8 @@ QtObject {
 
     component Spacing: JsonObject {
         property real scale: 1
-        property int small: 7 * scale
-        property int smaller: 10 * scale
+        property int smaller: 7 * scale
+        property int small: 10 * scale
         property int normal: 12 * scale
         property int large: 15 * scale
         property int larger: 20 * scale
@@ -45,8 +45,8 @@ QtObject {
 
     component FontSize: JsonObject {
         property real scale: 1
-        property int small: 11 * scale
-        property int smaller: 12 * scale
+        property int smaller: 11 * scale
+        property int small: 12 * scale
         property int normal: 13 * scale
         property int large: 15 * scale
         property int larger: 18 * scale

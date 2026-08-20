@@ -8,7 +8,7 @@ import "components" as Component
 Item {
     id: root
     anchors.fill: parent
-
+    anchors.margins: Config.Appearance.spacing.larger
     Column {
         anchors.fill: parent
         spacing: Config.Appearance.spacing.normal
@@ -21,7 +21,7 @@ Item {
         }
 
         Item {
-            width: parent.width - 10
+            width: parent.width
             height: parent.height
             anchors.topMargin: Config.Appearance.padding.small
 
