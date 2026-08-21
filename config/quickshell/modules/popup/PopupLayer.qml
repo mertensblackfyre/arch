@@ -24,7 +24,7 @@ Item {
     Rectangle {
         id: bg
         anchors.fill: parent
-      color: Config.Theme.background
+        color: Config.Theme.background
     }
 
     Behavior on implicitHeight {

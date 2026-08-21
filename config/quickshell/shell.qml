@@ -1,9 +1,10 @@
 import Quickshell
 import "modules/bar"
 import "modules/popup"
-import "config" as Config
 import "widgets"
 import QtQuick
+import Quickshell.Io
+import "services"
 
 ShellRoot {
     PanelWindow {
@@ -19,6 +20,7 @@ ShellRoot {
 
         Border {}
     }
+
     Bar {
         id: bar
     }
@@ -26,4 +28,8 @@ ShellRoot {
     Popup {
         id: pop
     }
+
+    Launcher{
+    }
+
 }

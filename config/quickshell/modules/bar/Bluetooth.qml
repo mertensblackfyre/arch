@@ -32,10 +32,10 @@ Item {
         pixelSize: Config.Appearance.font.size.extraLarge - 8
         customRadius: Config.Appearance.rounding.normal
 
-        rectColor: root.isBluetoothOn ? Config.Theme.surfaceLayer(Config.Theme.primary, 1) : Config.Theme.surfaceLayer(Config.Theme.background, 0)
+        rectColor:Config.Theme.surfaceLayer(Config.Theme.primary, 1)
         rectFallbackColor: rectColor
 
-        iconColor: root.isBluetoothOn ? Config.Theme.primaryOn : Config.Theme.backgroundOn
+        iconColor: Config.Theme.primaryOn
         iconFallbackColor: iconColor
 
         onClicked: {

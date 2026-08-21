@@ -26,6 +26,7 @@ Item {
         anchors.bottom: root.flipH ? parent.bottom : undefined
 
         color: Config.Theme.background
+        //color :"red"
 
         implicitWidth: parent.width / 2
         implicitHeight: parent.height / 2

@@ -57,12 +57,7 @@ PanelWindow {
                 damping: 0.3
             }
         }
-        /*
-        MouseArea {
-            anchors.fill: parent
-              onClicked: Services.ShellState._hide()
-        }
-        */
+
         HoverHandler {
             id: winHover
             onHoveredChanged: {
@@ -81,14 +76,11 @@ PanelWindow {
         }
 
         Widgets.Corners {
-
             anchors.left: parent.right
-
             anchors.bottom: parent.bottom
             flip: true
             flipH: true
         }
-
         Loader {
             anchors.fill: parent
             sourceComponent: {
