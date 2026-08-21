@@ -29,8 +29,8 @@ QtObject {
 
     component Padding: JsonObject {
         property real scale: 1
-        property int small: 5 * scale
-        property int smaller: 7 * scale
+        property int smaller: 5 * scale
+        property int small: 7 * scale
         property int normal: 10 * scale
         property int large: 12 * scale
         property int larger: 15 * scale
