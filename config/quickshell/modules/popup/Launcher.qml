@@ -103,11 +103,12 @@ PanelWindow {
 
     IpcHandler {
         target: "win"
-        function open(w: string, h: string) {
-            win.openPanel(w, h);
-        }
-        function close() {
-            win.closePanel();
+        function toggle(w:string, h:string){
+            if (win._visible && win._expand) {
+                win.closePanel();
+            }else{
+                win.openPanel(w, h);
+            }
         }
     }
 }
