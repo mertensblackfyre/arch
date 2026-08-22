@@ -1,9 +1,6 @@
 import Quickshell
 import Quickshell.Io
 import QtQuick
-import "../wifi"
-import "../bluetooth"
-import "../../services" as Services
 import "../../widgets" as Widgets
 import "../../config" as Config
 import "components" as Components
