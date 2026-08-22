@@ -4,8 +4,6 @@ import QtQuick
 import QtQuick.Layouts
 import "../../widgets" as Widgets
 import "../../config" as Config
-import "../../services" as Services
-import "../popup" as Pop
 
 PanelWindow {
     id: root
@@ -32,8 +30,7 @@ PanelWindow {
 
             Widgets.Pill {
                 Layout.alignment: Qt.AlignHCenter
-                topRightRadius: Config.Appearance.rounding.normal
-                bottomRightRadius: Config.Appearance.rounding.normal
+                radius: Config.Appearance.rounding.normal
                 Workspaces {}
             }
 

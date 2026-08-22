@@ -1,0 +1,4 @@
+
+module modules.battery
+
+BatteryPanel 1.0 BatteryPanel.qml

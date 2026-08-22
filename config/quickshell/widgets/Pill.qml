@@ -22,7 +22,7 @@ Rectangle {
 
     radius: cornerRadius
 
-    implicitWidth: _width
+    implicitWidth: _width - 8
     implicitHeight: _height
 
     color: Config.Theme.surfaceLayer(Config.Theme.primary,1);

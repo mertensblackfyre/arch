@@ -2,6 +2,7 @@ import Quickshell
 import QtQuick
 import "../wifi"
 import "../bluetooth"
+import "../battery"
 import "../../services" as Services
 import "../../widgets" as Widgets
 import "../../config" as Config
@@ -88,7 +89,9 @@ PanelWindow {
                 case "wifi":
                     return wifiComponent;
                 case "bt":
-                    return bluetoothComponent
+                    return bluetoothComponent;
+                case "battery":
+                    return battComponent;
                 default:
                     return null;
                 }
@@ -97,11 +100,15 @@ PanelWindow {
 
         Component {
             id: wifiComponent
-            NetworkList {}
+            NetworkPanel {}
         }
         Component {
-                   id: bluetoothComponent
-                  BluetoothList{}
-               }
+            id: bluetoothComponent
+            BluetoothPanel {}
+        }
+        Component {
+            id: battComponent
+            BatteryPanel {}
+        }
     }
 }

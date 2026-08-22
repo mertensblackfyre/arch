@@ -32,7 +32,7 @@ Item {
         pixelSize: Config.Appearance.font.size.extraLarge - 8
         customRadius: Config.Appearance.rounding.normal
 
-        rectColor:Config.Theme.surfaceLayer(Config.Theme.primary, 1)
+        rectColor:"transparent"
         rectFallbackColor: rectColor
 
         iconColor: Config.Theme.primaryOn

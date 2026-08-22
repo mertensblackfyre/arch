@@ -3,4 +3,4 @@
 
 module modules.bluetooth
 
-BluetoothList 1.0 BluetoothList.qml
+BluetoothPanel 1.0 BluetoothPanel.qml

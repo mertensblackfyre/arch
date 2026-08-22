@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.UPower
 import "../../widgets" as Widgets
+import "../../services" as Services
 import "../../config" as Config
 
 Item {
@@ -50,6 +51,8 @@ Item {
         }
         iconFallbackColor: iconColor
 
-        onClicked: {}
+        onClicked: {
+            Services.ShellState._show("battery", 500, 200);
+        }
     }
 }
